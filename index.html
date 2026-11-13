@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Diagnosa Belajar — Asesmen Diagnostik Adaptif</title>
+  <meta name="description" content="Asesmen diagnostik adaptif untuk SMK, SMP, dan SD: deteksi miskonsepsi, remediasi mikro, dan dasbor guru." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: {
+      indigo: {50:'#f1f6fd',100:'#e4eefb',200:'#cfe0f7',300:'#a9c6f0',400:'#7aa7e8',500:'#4a86dc',600:'#2a6dd0',700:'#1a5bbf',800:'#0f4aa8',900:'#0b3d91'},
+      slate: {50:'#f5f7fb',100:'#eaeef5',200:'#dce2ec',300:'#c2cad8',400:'#93a0b5',500:'#66748b',600:'#4a576b',700:'#333f52',800:'#1f2937',900:'#111827'}
+    }, fontFamily: { sans: ['Plus Jakarta Sans','system-ui','sans-serif'] } } } };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family:'Plus Jakarta Sans',system-ui,sans-serif; background:#f5f7fb; color:#111827; line-height:1.6; -webkit-font-smoothing:antialiased; }
+    h1,h2,h3,h4 { letter-spacing:-.015em; }
+    .uppercase, .tracking-wider { text-transform:none !important; letter-spacing:0 !important; }
+    .shadow-sm, .shadow-md, .shadow-lg { box-shadow:none !important; }
+    .rounded-2xl { border-radius:18px !important; }
+    main .border-slate-200 { border-color:#e1e7f0 !important; }
+    button, input, select, textarea { font-family:inherit; }
+    input, select, textarea { min-height:44px; }
+    button:not(:disabled) { cursor:pointer; }
+    :focus-visible { outline:2px solid #2a6dd0; outline-offset:2px; }
+    main { padding-top:2rem !important; padding-bottom:3rem !important; }
+    #student-intro-card { padding:2.25rem; }
+    .tab-active { background:#fff !important; color:#0b3d91 !important; box-shadow:0 0 0 1px #dce2ec, 0 1px 2px rgba(11,61,145,.12); }
+    .fade-in { animation:fadeIn .25s ease-out both; }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    details.solusi > summary { list-style:none; cursor:pointer; }
+    details.solusi > summary::-webkit-details-marker { display:none; }
+    details.solusi[open] .chev { transform:rotate(180deg); }
+    ::-webkit-scrollbar { width:6px; height:6px; }
+    ::-webkit-scrollbar-track { background:#eaeef5; }
+    ::-webkit-scrollbar-thumb { background:#c2cad8; border-radius:9999px; }
+    :root { box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); }
+    header.sticky { top:env(safe-area-inset-top,0px) !important; }
+    main .text-xs { font-size:.8125rem !important; line-height:1.55; }
+    #q-options > * { min-height:48px; }
+    details.guide > summary { list-style:none; cursor:pointer; }
+    details.guide > summary::-webkit-details-marker { display:none; }
+    details.guide[open] .chev { transform:rotate(180deg); }
+    @media (max-width:1023px) {
+      header.sticky { position:static !important; }
+      header nav { flex-wrap:nowrap !important; overflow-x:auto; scrollbar-width:none; scroll-snap-type:x proximity; }
+      header nav::-webkit-scrollbar { display:none; }
+      header nav button { flex:0 0 auto; white-space:nowrap; min-height:44px; scroll-snap-align:center; }
+    }
+    @media (max-width:640px) {
+      main { padding-top:1rem !important; }
+      #student-intro-card { padding:1.25rem; }
+      main h2 { font-size:1.4rem !important; line-height:1.25; }
+      #toast-box { left:1rem !important; right:1rem !important; bottom:1rem !important; max-width:none !important; }
+      main button { min-height:44px; }
+    }
+    @media (prefers-reduced-motion:reduce) { * { animation:none !important; transition:none !important; } }
+    @media print {
+      .no-print { display:none !important; }
+      body { background:#fff !important; color:#000 !important; }
+      .print-card { border:1px solid #cbd5e1 !important; box-shadow:none !important; break-inside:avoid; }
+    }
+
+    html{color-scheme:light}
+    body,button,input,select,textarea{font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+    svg text:not([font-family]){font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+    .cover{background:radial-gradient(1100px 520px at 85% -10%,#e4eefb 0%,transparent 60%),#fbfcfe}
+    .cover h1{letter-spacing:-.035em}
+    .pack-card{background:#fff;border:1px solid #e1e7f0;border-radius:18px;padding:1.25rem 1.35rem;text-align:left;transition:border-color .2s,transform .2s,box-shadow .2s;display:flex;flex-direction:column;gap:.5rem;min-height:150px}
+    .pack-card:hover{border-color:#2a6dd0;transform:translateY(-2px);box-shadow:0 10px 28px -14px rgba(11,61,145,.35)!important}
+    .pack-card.soft{background:#f8fafd;min-height:120px}
+    .hero-panel{background:linear-gradient(155deg,#0b3d91 0%,#0f4aa8 55%,#1a5bbf 100%);border-radius:26px;color:#fff;position:relative;overflow:hidden}
+    .chip{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .7rem;border-radius:999px;font-size:.75rem;font-weight:600}
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-indigo-100 selection:text-indigo-900">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-3 focus:px-4 focus:py-2 focus:rounded-lg focus:bg-white focus:text-indigo-900">Lewati ke konten utama</a>
+
+  <header id="app-header" class="hidden bg-white border-b border-slate-200 sticky top-0 z-30 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+      <div class="flex items-center gap-3.5 cursor-pointer" onclick="showCover()" title="Kembali ke sampul" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showCover()">
+        <div class="w-11 h-11 rounded-xl bg-indigo-900 flex items-center justify-center text-white shadow-md shrink-0">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900">DIAGNOSA BELAJAR</h1>
+            <span class="px-2 py-0.5 text-[11px] font-semibold rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">Adaptive Cognitive Engine</span>
+          </div>
+          <p class="text-xs text-slate-500">Inovasi Asesmen Diagnostik &amp; Remediasi Otomatis &bull; <strong class="text-slate-700">Aliyudin</strong> (SMKS Ciledug Al Musaddadiyah Garut)</p>
+        </div>
+      </div>
+
+      <!-- Navigasi Utama yang sudah diperbaiki (flex-nowrap + overflow-x-auto) -->
+      <nav class="flex flex-nowrap overflow-x-auto items-center gap-1.5 bg-slate-100 p-1.5 rounded-xl border border-slate-200/80" style="scrollbar-width: none;" aria-label="Mode Aplikasi">
+        <button id="nav-siswa" onclick="switchMode('siswa')" class="tab-active flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer whitespace-nowrap">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+          <span>Uji Siswa</span>
+        </button>
+        <button id="nav-analitik" onclick="switchMode('analitik')" class="text-slate-600 hover:text-slate-900 hover:bg-white/70 flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer whitespace-nowrap">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+          <span>Dasbor Guru</span>
+        </button>
+        <button id="nav-authoring" onclick="switchMode('authoring')" class="text-slate-600 hover:text-slate-900 hover:bg-white/70 flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer whitespace-nowrap">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"/></svg>
+          <span>Bank Soal</span>
+        </button>
+        <button id="nav-solusi" onclick="switchMode('solusi')" class="text-slate-600 hover:text-slate-900 hover:bg-white/70 flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer whitespace-nowrap">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>
+          <span>Solusi Merdeka 2026</span>
+        </button>
+        <button id="nav-faq" onclick="switchMode('faq')" class="text-slate-600 hover:text-slate-900 hover:bg-white/70 flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer whitespace-nowrap">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/></svg>
+          <span>FAQ</span>
+        </button>
+      </nav>
+    </div>
+
+    <div class="bg-slate-50 text-slate-600 border-t border-slate-200 text-xs py-2.5 px-4">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Paket Diagnostik Aktif: <strong id="active-pack-title" class="text-slate-900">Dasar Jaringan Komputer &amp; Logika Informatika (SMK TJKT / Umum)</strong></span>
+          <span class="hidden sm:inline text-slate-300">&bull;</span>
+          <span id="active-pack-meta" class="hidden sm:inline text-emerald-700 font-medium">8 Butir Diagnostik &bull; 3 Level Kognitif</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-slate-500">Paket soal:</span>
+          <select id="preset-selector" onchange="loadPresetPackage(this.value)" class="bg-white text-slate-800 border border-slate-300 rounded-lg px-2.5 py-1 text-xs font-medium cursor-pointer">
+            <option value="tkj">SMK/SMA: Jaringan Komputer &amp; Logika (8 Soal)</option>
+            <option value="matematika">SMP/MTs: Aljabar &amp; Persamaan Linear (4 Soal)</option>
+            <option value="ipa">SD/SMP: Gaya, Energi &amp; Rangkaian Listrik (4 Soal)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <section id="view-sampul" class="cover min-h-screen flex flex-col">
+    <div class="max-w-6xl w-full mx-auto px-5 sm:px-8 pt-6 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-indigo-900 text-white flex items-center justify-center font-extrabold">D</div>
+        <div class="leading-tight"><div class="text-sm font-extrabold text-slate-900">Diagnosa Belajar</div><div class="text-xs text-slate-500">SMKS Ciledug Al Musaddadiyah</div></div>
+      </div>
+      <button onclick="enterApp(null,'analitik')" class="text-sm font-semibold text-indigo-800 hover:text-indigo-900 px-3 py-2 rounded-lg hover:bg-indigo-50">Dasbor Guru</button>
+    </div>
+
+    <div class="max-w-6xl w-full mx-auto px-5 sm:px-8 pt-12 lg:pt-20 pb-14 grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7 space-y-6">
+        <span class="chip bg-indigo-50 text-indigo-800 border border-indigo-100">Asesmen Diagnostik &middot; Kurikulum Merdeka</span>
+        <h1 class="text-4xl sm:text-5xl lg:text-[3.6rem] font-extrabold text-slate-900 leading-[1.06]">Pahami cara berpikir, bukan sekadar nilai.</h1>
+        <p class="text-base sm:text-lg text-slate-600 max-w-xl leading-relaxed">Setiap jawaban dibaca untuk menemukan miskonsepsi, lalu dijawab dengan kartu remediasi singkat dan soal yang menyesuaikan kemampuan siswa.</p>
+        <div class="flex flex-wrap gap-3 pt-1">
+          <a href="#paket" onclick="document.getElementById('paket').scrollIntoView({behavior:'smooth'});return false" class="px-6 py-3 rounded-xl bg-indigo-900 hover:bg-indigo-800 text-white font-semibold text-sm">Pilih paket soal</a>
+          <button onclick="enterApp(lastPackKey(),'siswa')" class="px-6 py-3 rounded-xl bg-white border border-slate-300 hover:border-indigo-600 text-slate-800 font-semibold text-sm">Buka paket terakhir</button>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="hero-panel p-7 sm:p-8">
+          <svg class="absolute -right-10 -top-10 w-64 h-64 opacity-20" viewBox="0 0 200 200" fill="none" stroke="#fff" stroke-width="1.2" aria-hidden="true"><circle cx="100" cy="100" r="95"/><circle cx="100" cy="100" r="68"/><circle cx="100" cy="100" r="40"/><path d="M5 100h190M100 5v190"/></svg>
+          <div class="relative space-y-6">
+            <div class="text-xs font-semibold text-indigo-100">Alur adaptif tiga level</div>
+            <ol class="space-y-4 text-sm">
+              <li class="flex gap-3"><span class="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center font-bold shrink-0">1</span><span><b>Fondasi konsep</b><br><span class="text-indigo-100">Menguji pemahaman dasar</span></span></li>
+              <li class="flex gap-3"><span class="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center font-bold shrink-0">2</span><span><b>Analisis &amp; penerapan</b><br><span class="text-indigo-100">Soal naik jika konsep kuat</span></span></li>
+              <li class="flex gap-3"><span class="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center font-bold shrink-0">3</span><span><b>Pemecahan masalah</b><br><span class="text-indigo-100">Remediasi mikro bila keliru</span></span></li>
+            </ol>
+            <div class="grid grid-cols-3 gap-3 pt-5 border-t border-white/20 text-center">
+              <div><div id="st-packs" class="text-2xl font-extrabold">0</div><div class="text-[11px] text-indigo-100">Paket soal</div></div>
+              <div><div id="st-items" class="text-2xl font-extrabold">0</div><div class="text-[11px] text-indigo-100">Butir soal</div></div>
+              <div><div id="st-saved" class="text-2xl font-extrabold">0</div><div class="text-[11px] text-indigo-100">Hasil tersimpan</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="paket" class="bg-white border-t border-slate-200">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8 py-14 space-y-12">
+        <div class="space-y-5">
+          <div class="flex items-end justify-between flex-wrap gap-2">
+            <div><h2 class="text-2xl font-extrabold text-slate-900">Paket Soal SMK</h2><p class="text-sm text-slate-500">Fokus utama &mdash; pilih mata pelajaran untuk mulai.</p></div>
+          </div>
+          <div id="grid-smk" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </div>
+        <div class="space-y-5">
+          <div><h2 class="text-lg font-bold text-slate-800">Paket Soal SMP / MTs <span class="chip bg-slate-100 text-slate-600 ml-1">Opsional</span></h2><p class="text-sm text-slate-500">Matematika, IPA, Biologi, Bahasa Indonesia, dan Sejarah.</p></div>
+          <div id="grid-smp" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div></div><div class="space-y-5"><div><h2 class="text-lg font-bold text-slate-800">Paket Soal SD / MI <span class="chip bg-slate-100 text-slate-600 ml-1">Opsional</span></h2><p class="text-sm text-slate-500">Mata pelajaran wajib: Pancasila, Bahasa Indonesia, Matematika, dan IPAS.</p></div><div id="grid-sd" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </div>
+      </div>
+    </div>
+    <footer class="bg-slate-50 border-t border-slate-200 py-6 text-center text-xs text-slate-500">Dikembangkan oleh <b class="text-slate-700">Aliyudin</b> &middot; SMKS Ciledug Al Musaddadiyah, Garut</footer>
+  </section>
+
+  <div id="toast-box" role="status" aria-live="polite" class="fixed bottom-5 right-5 z-50 hidden max-w-sm bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl border border-slate-700 flex items-start gap-3 fade-in no-print">
+    <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+    </div>
+    <div class="text-xs leading-relaxed" id="toast-message">Pesan sistem</div>
+  </div>
+
+  <main id="main-content" class="hidden flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <section id="view-siswa" class="fade-in space-y-6">
+      <div id="student-intro-card" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 max-w-4xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-100 pb-6">
+          <div class="space-y-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-100">
+              Asesmen Diagnostik Kognitif Kurikulum Merdeka
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Mulai Sesi Diagnostik Pemahaman</h2>
+            <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+              Sistem ini tidak sekadar menilai benar atau salah. Setiap jawaban Anda dianalisis secara <em>real-time</em> untuk mendeteksi kemungkinan <strong>miskonsepsi konsep</strong>, memberikan <strong>kartu remediasi mikro 30 detik</strong>, dan menyesuaikan tingkat kesulitan soal berikutnya secara adaptif.
+            </p>
+          </div>
+          <div class="bg-slate-50 rounded-xl p-4 border border-slate-200/80 shrink-0 space-y-2 text-xs">
+            <div class="font-bold text-slate-800 uppercase tracking-wider text-[11px]">Alur Mesin Adaptif:</div>
+            <div class="flex items-center gap-2 text-slate-700"><span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span> <strong>Level 1:</strong> Fondasi Konsep Dasar</div>
+            <div class="flex items-center gap-2 text-slate-700"><span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span> <strong>Level 2:</strong> Analisis &amp; Penerapan</div>
+            <div class="flex items-center gap-2 text-slate-700"><span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span> <strong>Level 3:</strong> Pemecahan Masalah</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-6">
+          <div>
+            <label for="student-name" class="block text-xs font-semibold text-slate-700 mb-1.5">Nama Lengkap Siswa</label>
+            <input type="text" id="student-name" value="" placeholder="Nama lengkap Anda" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+          </div>
+          <div>
+            <label for="student-class" class="block text-xs font-semibold text-slate-700 mb-1.5">Kelas / Rombel</label>
+            <input type="text" id="student-class" value="" placeholder="Contoh: XI TKJ 1 / IX-A" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+          </div>
+          <div>
+            <label for="student-code" class="block text-xs font-semibold text-slate-700 mb-1.5">Kode Kelas <span class="font-normal text-slate-400">(dari guru)</span></label>
+            <input type="text" id="student-code" maxlength="9" autocomplete="off" autocapitalize="characters" placeholder="XK7-TKJ2" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-mono uppercase focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+          </div>
+          <div class="flex items-end">
+            <button onclick="startStudentSession()" class="w-full py-2.5 px-5 rounded-xl bg-indigo-900 hover:bg-indigo-800 text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer">
+              <span>Mulai Diagnosa Sekarang</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+            </button>
+          </div>
+        </div>
+        <p class="text-[11px] text-slate-500 pt-3 leading-relaxed">Dengan kode kelas, nama dan hasil Anda dikirim ke guru pemilik kode itu dan hanya dapat dilihat olehnya. Tanpa kode, hasil hanya tersimpan di perangkat ini dan dapat diunduh sebagai berkas untuk diserahkan ke guru.</p>
+      </div>
+
+      <div id="student-quiz-area" class="hidden max-w-5xl mx-auto space-y-5">
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-indigo-50 text-indigo-800 font-bold text-sm flex items-center justify-center border border-indigo-100" id="q-counter">1/8</div>
+            <div>
+              <div class="text-xs text-slate-500">Peserta: <strong id="display-student-info" class="text-slate-800">Rizky Pratama (XI TKJ 1)</strong></div>
+              <div class="flex items-center gap-2 mt-0.5">
+                <span id="q-topic-badge" class="text-xs font-semibold text-indigo-700">Topik: Pengalamatan IP &amp; MAC</span>
+                <span id="q-remedial-tag" class="hidden px-2 py-0.5 rounded-md text-[11px] font-bold bg-amber-100 text-amber-800 border border-amber-300">Soal Verifikasi Pasca-Remediasi</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div class="text-right">
+              <div class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">Tingkat Kesulitan Adaptif</div>
+              <div id="adaptive-level-label" class="text-xs font-bold text-indigo-900">Level 1 — Konsep Dasar</div>
+            </div>
+            <div class="flex gap-1" id="level-bars">
+              <span class="w-3 h-7 rounded-sm bg-indigo-600"></span>
+              <span class="w-3 h-7 rounded-sm bg-slate-200"></span>
+              <span class="w-3 h-7 rounded-sm bg-slate-200"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span id="q-competency-code" class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Kompetensi: K-01</span>
+                <span class="text-xs text-slate-400">Pilih jawaban paling tepat</span>
+              </div>
+              <h3 id="q-text" class="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                Memuat pertanyaan diagnostik...
+              </h3>
+              <div id="q-options" class="space-y-2.5 pt-2"></div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <button onclick="resetStudentSession()" class="text-xs font-medium text-slate-500 hover:text-slate-800 cursor-pointer">Batalkan Sesi</button>
+              <button id="btn-submit-answer" onclick="submitStudentAnswer()" disabled class="px-5 py-2.5 rounded-xl bg-indigo-900 disabled:bg-slate-300 disabled:cursor-not-allowed hover:bg-indigo-800 text-white text-sm font-semibold transition-all cursor-pointer">
+                Periksa &amp; Analisis Jawaban
+              </button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 space-y-5">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Visualisasi Konteks Soal</span>
+                <span class="text-[11px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-medium">Diagram Vektor</span>
+              </div>
+              <div id="q-diagram-container" class="bg-slate-50 rounded-xl border border-slate-200/80 p-3 flex items-center justify-center min-h-[180px]">
+              </div>
+            </div>
+
+            <div id="diagnostic-feedback-card" class="hidden rounded-2xl border-2 p-5 shadow-md fade-in space-y-3.5">
+              <div class="flex items-start gap-3">
+                <div id="diag-icon" class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5"></div>
+                <div>
+                  <div id="diag-status-badge" class="text-[11px] font-extrabold uppercase tracking-wider">STATUS DIAGNOSA</div>
+                  <h4 id="diag-title" class="text-base font-bold text-slate-900 mt-0.5">Judul Diagnosa</h4>
+                </div>
+              </div>
+
+              <div id="diag-misconception-box" class="bg-rose-50/90 border border-rose-200 rounded-xl p-3.5 text-xs space-y-1">
+                <div class="font-bold text-rose-800 flex items-center gap-1.5">
+                  <span>&#9888; Terdeteksi Pola Miskonsepsi:</span>
+                </div>
+                <p id="diag-misconception-text" class="text-rose-900 leading-relaxed"></p>
+              </div>
+
+              <div class="bg-white/95 border border-slate-200 rounded-xl p-3.5 text-xs space-y-1.5">
+                <div class="font-bold text-indigo-900 flex items-center justify-between">
+                  <span>&#128161; Kartu Remediasi Mikro (30 Detik)</span>
+                  <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-indigo-50 text-indigo-700">Penguatan Konsep</span>
+                </div>
+                <p id="diag-remediation-text" class="text-slate-700 leading-relaxed"></p>
+              </div>
+
+              <div id="diag-next-step-hint" class="text-xs font-medium text-slate-600 bg-slate-100/80 rounded-lg px-3 py-2"></div>
+
+              <button onclick="proceedNextQuestion()" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer">
+                <span id="btn-next-label">Lanjutkan ke Soal Adaptif Berikutnya</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="student-result-card" class="hidden max-w-4xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6 fade-in">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+          <div>
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">Sesi Diagnostik Selesai</span>
+            <h2 class="text-2xl font-extrabold text-slate-900 mt-2">Profil Kognitif &amp; Peta Pemahaman Siswa</h2>
+            <p id="result-student-meta" class="text-sm text-slate-600 mt-0.5">Rizky Pratama &bull; XI TKJ 1</p>
+          </div>
+          <div class="text-left sm:text-right bg-slate-50 px-5 py-3 rounded-xl border border-slate-200">
+            <div class="text-xs text-slate-500 font-medium">Indeks Penguasaan Konsep</div>
+            <div id="result-score-big" class="text-3xl font-extrabold text-indigo-900">85%</div>
+            <div id="result-group-badge" class="text-xs font-bold text-emerald-700 mt-0.5">Kelompok Pengayaan</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-600">Rekam Jejak Diagnosa &amp; Remediasi</h4>
+            <div id="result-log-list" class="space-y-2 text-xs"></div>
+          </div>
+          <div class="p-4 rounded-xl bg-indigo-50/60 border border-indigo-100 space-y-2.5">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-900">Rekomendasi Tindak Lanjut Pembelajaran</h4>
+            <p id="result-recommendation" class="text-xs text-slate-700 leading-relaxed"></p>
+            <p id="cloud-status" class="text-xs font-semibold text-slate-700"></p>
+            <div class="pt-2 flex flex-wrap gap-2">
+              <button onclick="switchMode('analitik')" class="px-4 py-2 rounded-lg bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-semibold cursor-pointer">
+                Lihat Hasil di Dasbor Guru &rarr;
+              </button>
+              <button onclick="unduhHasil()" class="px-4 py-2 rounded-lg bg-white border border-indigo-300 hover:bg-indigo-50 text-indigo-800 text-xs font-semibold cursor-pointer">Unduh Berkas Hasil (.json)</button>
+              <button onclick="resetStudentSession()" class="px-4 py-2 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold cursor-pointer">
+                Uji Siswa Lain
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-analitik" class="hidden fade-in space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-4 print-card">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-indigo-50 text-indigo-800 border border-indigo-200">Kurikulum Merdeka</span>
+            <span class="text-xs text-slate-500">Laporan Asesmen Diagnostik Kognitif</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Dasbor Analitik Kelas &amp; Peta Panas Miskonsepsi</h2>
+          <p class="text-xs sm:text-sm text-slate-600 mt-0.5">Pemetaan otomatis tingkat penguasaan siswa untuk pembelajaran berdiferensiasi (Pengayaan, Penguatan, dan Pendampingan Intensif).</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2.5 no-print">
+          <button onclick="loadDataDariFirebase()" class="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white border border-indigo-700 text-xs font-semibold transition-all cursor-pointer">
+  ☁️ Tarik Data dari Cloud (Firebase)
+          </button>
+          <button onclick="window.print()" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5 cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"/></svg>
+            <span>Cetak Laporan PDF</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm print-card">
+          <div class="text-xs font-semibold text-slate-500">Total Siswa Terdiagnosa</div>
+          <div id="stat-total-students" class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">32</div>
+          <div class="text-[11px] text-emerald-600 font-medium mt-1">100% Partisipasi Kelas</div>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm print-card">
+          <div class="text-xs font-semibold text-slate-500">Rata-Rata Penguasaan</div>
+          <div id="stat-avg-mastery" class="text-2xl sm:text-3xl font-extrabold text-indigo-900 mt-1">74,2%</div>
+          <div class="text-[11px] text-slate-500 mt-1">Setelah Remediasi Mikro</div>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm print-card">
+          <div class="text-xs font-semibold text-slate-500">Miskonsepsi Teratasi</div>
+          <div id="stat-remediated-rate" class="text-2xl sm:text-3xl font-extrabold text-emerald-600 mt-1">81%</div>
+          <div class="text-[11px] text-slate-500 mt-1">Lulus Soal Verifikasi</div>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm print-card">
+          <div class="text-xs font-semibold text-slate-500">Butuh Pendampingan</div>
+          <div id="stat-intensive-count" class="text-2xl sm:text-3xl font-extrabold text-rose-600 mt-1">6 Siswa</div>
+          <div class="text-[11px] text-rose-700 font-medium mt-1">Prioritas Intervensi Guru</div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <div class="lg:col-span-6 bg-white rounded-2xl border border-slate-200 p-5 shadow-sm print-card space-y-4">
+          <div>
+            <h3 class="text-base font-bold text-slate-900">Peta Penguasaan Konsep per Topik</h3>
+            <p class="text-xs text-slate-500">Persentase ketuntasan siswa pada setiap indikator kompetensi dasar.</p>
+          </div>
+          <div id="competency-bars-container" class="space-y-3.5 pt-1"></div>
+        </div>
+
+        <div class="lg:col-span-6 bg-white rounded-2xl border border-slate-200 p-5 shadow-sm print-card space-y-4">
+          <div>
+            <h3 class="text-base font-bold text-slate-900">Top Miskonsepsi Terdeteksi di Kelas</h3>
+            <p class="text-xs text-slate-500">Pola kesalahan berpikir yang paling sering dipilih siswa sebelum remediasi.</p>
+          </div>
+          <div id="top-misconceptions-list" class="space-y-3"></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm print-card space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <div>
+            <h3 class="text-base font-bold text-slate-900">Rekomendasi Pengelompokan Siswa (Pembelajaran Berdiferensiasi)</h3>
+            <p class="text-xs text-slate-500">Otomatis membagi siswa berdasarkan indeks penguasaan akhir dan status miskonsepsi.</p>
+          </div>
+          <span class="text-xs font-semibold text-indigo-800 bg-indigo-50 px-3 py-1 rounded-lg">Siap Digunakan di Modul Ajar</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="differentiation-groups">
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm print-card space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h3 class="text-base font-bold text-slate-900">Matriks Heatmap Pemahaman Siswa</h3>
+            <p class="text-xs text-slate-500">Hijau = Paham Utuh &bull; Kuning = Paham Setelah Remediasi &bull; Merah = Masih Miskonsepsi</p>
+          </div>
+          <div class="flex items-center gap-3 text-xs font-medium">
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-emerald-500 inline-block"></span> Paham Utuh</span>
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-amber-400 inline-block"></span> Teremediasi</span>
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-rose-500 inline-block"></span> Miskonsepsi</span>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="border-b border-slate-200 text-slate-600 bg-slate-50">
+                <th class="py-2.5 px-3 font-bold">Nama Siswa</th>
+                <th class="py-2.5 px-2 font-bold text-center">Skor</th>
+                <th class="py-2.5 px-2 font-bold text-center">Matriks Penguasaan Butir</th>
+                <th class="py-2.5 px-3 font-bold">Miskonsepsi Utama</th>
+                <th class="py-2.5 px-3 font-bold">Kelompok Belajar</th>
+              </tr>
+            </thead>
+            <tbody id="heatmap-table-body" class="divide-y divide-slate-100"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-authoring" class="hidden fade-in space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+        <div class="border-b border-slate-100 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <span class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">Adaptif Lintas Mapel &amp; Jenjang (SD–SMK)</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Studio Pembuat Paket Diagnostik Guru</h2>
+            <p class="text-xs sm:text-sm text-slate-600 mt-0.5">Tambahkan butir soal diagnostik untuk mata pelajaran apa pun lengkap dengan pemetaan miskonsepsi pada setiap pengecoh.</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button onclick="exportCurrentPackJSON()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition-all cursor-pointer">
+              &#128203; Salin JSON Paket Soal
+            </button>
+            <button onclick="applyAuthoringToStudentMode()" class="px-4 py-2 rounded-xl bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-semibold shadow-sm transition-all cursor-pointer">
+              &#9654; Jalankan Paket di Mode Siswa
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-7 space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200/80">
+            <h3 class="text-sm font-bold text-slate-900">Tambah Butir Soal Diagnostik Baru</h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Topik / Kompetensi</label>
+                <input type="text" id="new-q-topic" placeholder="Contoh: Subnetting / Pecahan / Hukum Newton" class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs focus:outline-none focus:border-indigo-500" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Level Kognitif</label>
+                <select id="new-q-level" class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs focus:outline-none focus:border-indigo-500">
+                  <option value="1">Level 1 — Konsep Dasar</option>
+                  <option value="2">Level 2 — Analisis Terapan</option>
+                  <option value="3">Level 3 — Pemecahan Masalah</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Pertanyaan Diagnostik</label>
+              <textarea id="new-q-text" rows="2" placeholder="Tuliskan pertanyaan yang menguji pemahaman konsep..." class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs focus:outline-none focus:border-indigo-500"></textarea>
+            </div>
+
+            <div class="space-y-3">
+              <div class="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200 space-y-1.5">
+                <label class="block text-xs font-bold text-emerald-900">Opsi A (Kunci Jawaban Benar)</label>
+                <input type="text" id="new-opt-correct" placeholder="Tuliskan pernyataan konsep yang benar..." class="w-full px-3 py-1.5 rounded-lg border border-emerald-300 bg-white text-xs" />
+              </div>
+
+              <div class="p-3 rounded-xl bg-rose-50/60 border border-rose-200 space-y-1.5">
+                <label class="block text-xs font-bold text-rose-900">Opsi B (Pengecoh 1) &amp; Diagnosa Miskonsepsinya</label>
+                <input type="text" id="new-opt-wrong1" placeholder="Pilihan jawaban salah yang sering dipilih siswa..." class="w-full px-3 py-1.5 rounded-lg border border-rose-200 bg-white text-xs" />
+                <input type="text" id="new-misc-wrong1" placeholder="Akar miskonsepsi jika siswa memilih B..." class="w-full px-3 py-1.5 rounded-lg border border-rose-200 bg-white text-xs" />
+              </div>
+
+              <div class="p-3 rounded-xl bg-rose-50/60 border border-rose-200 space-y-1.5">
+                <label class="block text-xs font-bold text-rose-900">Opsi C (Pengecoh 2) &amp; Diagnosa Miskonsepsinya</label>
+                <input type="text" id="new-opt-wrong2" placeholder="Pilihan jawaban salah kedua..." class="w-full px-3 py-1.5 rounded-lg border border-rose-200 bg-white text-xs" />
+                <input type="text" id="new-misc-wrong2" placeholder="Akar miskonsepsi jika siswa memilih C..." class="w-full px-3 py-1.5 rounded-lg border border-rose-200 bg-white text-xs" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Kartu Remediasi Mikro (Penjelasan 30 Detik)</label>
+              <textarea id="new-q-remediation" rows="2" placeholder="Penjelasan singkat dan analogi mudah dipahami untuk meluruskan miskonsepsi siswa..." class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs focus:outline-none focus:border-indigo-500"></textarea>
+            </div>
+
+            <button onclick="addCustomQuestion()" class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition-all cursor-pointer">
+              + Tambahkan Butir ke Paket Aktif
+            </button>
+          </div>
+
+          <div class="lg:col-span-5 space-y-4">
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="text-sm font-bold text-slate-900">Daftar Butir Paket Aktif (<span id="authoring-count">8</span>)</h3>
+                <span class="text-[11px] text-slate-500">Siap Diujikan</span>
+              </div>
+              <div id="authoring-question-list" class="space-y-2 max-h-[340px] overflow-y-auto pr-1"></div>
+            </div>
+
+            <div class="bg-slate-900 text-slate-200 rounded-2xl p-4 space-y-2.5">
+              <div class="text-xs font-bold text-white">Impor Paket Soal JSON (Berbagi Antar Guru / MGMP)</div>
+              <p class="text-[11px] text-slate-400">Tempel kode JSON paket soal dari rekan guru untuk langsung memuatnya ke mesin diagnostik.</p>
+              <textarea id="import-json-input" rows="3" placeholder='{"title":"Bahasa Inggris - Tenses","questions":[...]}' class="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-xs text-emerald-300 font-mono focus:outline-none focus:border-emerald-400"></textarea>
+              <button onclick="importPackJSON()" class="w-full py-2 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition-all cursor-pointer">
+                Muat Paket dari JSON
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solusi Mode - Diperbaiki jadi 2 kolom -->
+    <section id="view-solusi" class="hidden fade-in space-y-6 max-w-5xl mx-auto">
+      <div class="space-y-2">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Solusi praktis Kurikulum Merdeka 2026</h2>
+        <p class="text-sm text-slate-600 max-w-2xl">Tantangan yang paling sering dihadapi guru, dengan langkah yang bisa dimulai minggu ini. Pilih satu masalah, lalu coba satu langkah kecil.</p>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6">
+        <h3 class="text-base font-bold text-slate-900">Siklus 4 minggu untuk satu topik</h3>
+        <ol class="grid grid-cols-1 sm:grid-cols-4 gap-3 mt-3 text-xs text-slate-600">
+          <li class="rounded-xl bg-slate-50 p-3"><strong class="block text-slate-900 text-sm mb-0.5">Minggu 1</strong>Diagnosa 10 menit di awal topik</li>
+          <li class="rounded-xl bg-slate-50 p-3"><strong class="block text-slate-900 text-sm mb-0.5">Minggu 2</strong>Bagi tiga kelompok sesuai hasil</li>
+          <li class="rounded-xl bg-slate-50 p-3"><strong class="block text-slate-900 text-sm mb-0.5">Minggu 3</strong>Remediasi mikro dan proyek kecil</li>
+          <li class="rounded-xl bg-slate-50 p-3"><strong class="block text-slate-900 text-sm mb-0.5">Minggu 4</strong>Verifikasi, refleksi, lalu lanjut</li>
+        </ol>
+      </div>
+
+      <div id="solusi-filters" class="flex flex-wrap gap-2 no-print" role="group" aria-label="Saring topik"></div>
+      <div id="solusi-list" class="grid grid-cols-1 md:grid-cols-2 gap-3 items-start"></div>
+
+      <p class="text-xs text-slate-500">Panduan ini bersifat saran praktik. Untuk ketentuan resmi, rujuk edaran terbaru Kemendikdasmen dan kebijakan satuan pendidikan Anda.</p>
+    </section>
+
+    <!-- FAQ Mode - Diperbaiki jadi 2 kolom -->
+    <section id="view-faq" class="hidden fade-in space-y-6 max-w-5xl mx-auto">
+      <div class="space-y-2">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Pertanyaan yang sering diajukan</h2>
+        <p class="text-sm text-slate-600">Jawaban singkat tentang cara memakai aplikasi ini di kelas.</p>
+      </div>
+      <div id="faq-list" class="grid grid-cols-1 md:grid-cols-2 gap-3 items-start"></div>
+      <p class="text-xs text-slate-500">Belum menemukan jawabannya? Hubungi pengembang: Aliyudin, SMKS Ciledug Al Musaddadiyah Garut.</p>
+    </section>
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-5 px-4 mt-8 no-print">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
+      <div>
+        <strong>DIAGNOSA BELAJAR</strong> &mdash; Mesin Diagnostik Miskonsepsi &amp; Pembelajaran Adaptif (Single File &bull; Tersimpan Lokal &amp; Cloud)
+      </div>
+      <div>
+        Dikembangkan oleh <strong class="text-slate-700">Aliyudin</strong> &bull; Guru Produktif TKJ, SMKS Ciledug Al Musaddadiyah Garut
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const SVG_DIAGRAMS = {
+      ip_mac: `
+        <svg viewBox="0 0 360 150" class="w-full h-auto max-h-40">
+          <rect x="15" y="25" width="110" height="95" rx="10" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+          <text x="70" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="#1e1b4b">Laptop Siswa</text>
+          <rect x="25" y="58" width="90" height="22" rx="4" fill="#ffffff" stroke="#c7d2fe"/>
+          <text x="70" y="73" text-anchor="middle" font-size="9.5" font-weight="600" fill="#4338ca">IP: 192.168.1.15</text>
+          <rect x="25" y="86" width="90" height="22" rx="4" fill="#ffffff" stroke="#a7f3d0"/>
+          <text x="70" y="101" text-anchor="middle" font-size="9" font-weight="600" fill="#047857">MAC: 00:1A:2B:3C</text>
+          <path d="M125 72 L225 72" stroke="#64748b" stroke-width="2.5" stroke-dasharray="5,4"/>
+          <polygon points="225,67 235,72 225,77" fill="#64748b"/>
+          <text x="180" y="63" text-anchor="middle" font-size="9.5" font-weight="600" fill="#475569">Pindah Wi-Fi Sekolah</text>
+          <rect x="235" y="25" width="110" height="95" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+          <text x="290" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="#064e3b">Router Lab TKJ</text>
+          <text x="290" y="73" text-anchor="middle" font-size="9.5" font-weight="600" fill="#065f46">IP Baru: 10.10.5.22</text>
+          <text x="290" y="95" text-anchor="middle" font-size="9.5" font-weight="700" fill="#b45309">MAC: Tetap / Berubah?</text>
+        </svg>`,
+      subnet_mask: `
+        <svg viewBox="0 0 360 150" class="w-full h-auto max-h-40">
+          <rect x="20" y="18" width="320" height="44" rx="8" fill="#1e1b4b"/>
+          <text x="180" y="37" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">IP: 192.168.10.25  |  Prefix: /24 (255.255.255.0)</text>
+          <text x="180" y="53" text-anchor="middle" font-size="9.5" fill="#a5b4fc">3 Oktet Pertama = Network ID  |  Oktet Terakhir = Host ID</text>
+          <rect x="20" y="78" width="145" height="54" rx="8" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+          <text x="92" y="98" text-anchor="middle" font-size="10" font-weight="700" fill="#312e81">PC-A: 192.168.10.5</text>
+          <text x="92" y="116" text-anchor="middle" font-size="9" fill="#4338ca">Net ID: 192.168.10.0</text>
+          <rect x="195" y="78" width="145" height="54" rx="8" fill="#fff1f2" stroke="#f43f5e" stroke-width="1.5"/>
+          <text x="267" y="98" text-anchor="middle" font-size="10" font-weight="700" fill="#881337">PC-B: 192.168.20.5</text>
+          <text x="267" y="116" text-anchor="middle" font-size="9" fill="#be123c">Net ID: 192.168.20.0</text>
+        </svg>`,
+      dns_http: `
+        <svg viewBox="0 0 360 150" class="w-full h-auto max-h-40">
+          <rect x="15" y="50" width="85" height="50" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+          <text x="57" y="73" text-anchor="middle" font-size="10" font-weight="700" fill="#1e3a8a">Browser</text>
+          <text x="57" y="88" text-anchor="middle" font-size="8.5" fill="#1d4ed8">smkcalm.sch.id</text>
+          <path d="M100 65 L145 40" stroke="#059669" stroke-width="2"/>
+          <rect x="145" y="15" width="90" height="45" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+          <text x="190" y="35" text-anchor="middle" font-size="10" font-weight="700" fill="#065f46">DNS Server</text>
+          <text x="190" y="49" text-anchor="middle" font-size="8.5" fill="#047857">Penerjemah Nama</text>
+          <path d="M100 85 L250 105" stroke="#4f46e5" stroke-width="2" stroke-dasharray="4,3"/>
+          <rect x="250" y="80" width="95" height="50" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+          <text x="297" y="103" text-anchor="middle" font-size="10" font-weight="700" fill="#312e81">Web Server</text>
+          <text x="297" y="117" text-anchor="middle" font-size="8.5" fill="#4338ca">103.145.22.10</text>
+        </svg>`,
+      logic_loop: `
+        <svg viewBox="0 0 360 150" class="w-full h-auto max-h-40">
+          <rect x="30" y="15" width="300" height="120" rx="10" fill="#0f172a"/>
+          <text x="48" y="38" font-family="monospace" font-size="11" fill="#38bdf8">total = 0</text>
+          <text x="48" y="58" font-family="monospace" font-size="11" fill="#f472b6">for i in range(1, 5):</text>
+          <text x="68" y="78" font-family="monospace" font-size="11" fill="#a7f3d0">if i % 2 == 0:</text>
+          <text x="88" y="98" font-family="monospace" font-size="11" fill="#fde047">total = total + i</text>
+          <text x="48" y="120" font-family="monospace" font-size="11" fill="#ffffff">print(total)  # Berapa outputnya?</text>
+        </svg>`,
+      math_linear: `
+        <svg viewBox="0 0 360 150" class="w-full h-auto max-h-40">
+          <rect x="25" y="20" width="310" height="110" rx="10" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+          <text x="180" y="52" text-anchor="middle" font-size="16" font-weight="800" fill="#1e1b4b">3(x - 2) = 15</text>
+          <line x1="60" y1="68" x2="300" y2="68" stroke="#c7d2fe" stroke-width="1.5"/>
+          <text x="180" y="90" text-anchor="middle" font-size="11" fill="#3730a3">Perhatikan sifat distributif perkalian terhadap pengurangan:</text>
+          <text x="180" y="110" text-anchor="middle" font-size="11" font-weight="700" fill="#047857">a(b - c) = (a × b) - (a × c)</text>
+        </svg>`,
+      science_circuit: `
+        <svg viewBox="0 0 360 150" class="w-full h-auto max-h-40">
+          <rect x="45" y="25" width="270" height="100" rx="12" fill="none" stroke="#334155" stroke-width="2.5"/>
+          <rect x="25" y="55" width="40" height="40" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <text x="45" y="79" text-anchor="middle" font-size="10" font-weight="700" fill="#92400e">12V</text>
+          <circle cx="145" cy="25" r="16" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+          <text x="145" y="29" text-anchor="middle" font-size="9.5" font-weight="700" fill="#065f46">L1</text>
+          <circle cx="225" cy="25" r="16" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+          <text x="225" y="29" text-anchor="middle" font-size="9.5" font-weight="700" fill="#065f46">L2</text>
+          <text x="180" y="142" text-anchor="middle" font-size="10" font-weight="600" fill="#475569">Rangkaian Seri: Jika Lampu L1 Putus, Bagaimana L2?</text>
+        </svg>`
+    };
+
+    const PRESET_PACKAGES = {
+      tkj: {
+        id: 'tkj', title: 'Dasar Jaringan Komputer & Logika Informatika (SMK TJKT / Umum)', subject: 'Teknik Jaringan Komputer & Telekomunikasi',
+        questions: [
+          { id: 'Q1', code: 'K-01', topic: 'Identitas Perangkat (IP vs MAC)', level: 1, diagram: 'ip_mac', text: 'Sebuah laptop berpindah koneksi dari Wi-Fi rumah ke Wi-Fi sekolah. Perangkat tersebut otomatis mendapat alamat IP baru dari DHCP Server sekolah. Bagaimana kondisi MAC Address pada kartu jaringan laptop tersebut?', options: [{ text: 'MAC Address tetap sama karena tertanam secara fisik (hardware) pada NIC perangkat.', isCorrect: true }, { text: 'MAC Address ikut berubah menyesuaikan subnet jaringan Wi-Fi sekolah.', isCorrect: false, misconception: 'Menganggap MAC Address bersifat dinamis seperti IP Address dan ditentukan oleh router/DHCP.' }, { text: 'MAC Address terhapus sementara sampai laptop kembali terhubung ke Wi-Fi rumah.', isCorrect: false, misconception: 'Mengira MAC Address hanya aktif pada satu jaringan asal dan tidak berlaku lintas jaringan.' }], remediation: 'Ingat analogi identitas: MAC Address adalah NIK (Nomor Induk Kependudukan) yang melekat permanen pada fisik kartu jaringan sejak diproduksi pabrik. Sedangkan IP Address adalah alamat domisili sementara yang berubah setiap kali perangkat berpindah jaringan.' },
+          { id: 'Q2', code: 'K-02', topic: 'Segmentasi Jaringan & Subnetting', level: 1, diagram: 'subnet_mask', text: 'Komputer A (192.168.10.5/24) dan Komputer B (192.168.20.5/24) dihubungkan langsung menggunakan satu Switch unmanaged tanpa Router. Mengapa kedua komputer gagal melakukan ping satu sama lain?', options: [{ text: 'Karena keduanya berada pada Network ID yang berbeda sehingga membutuhkan Router untuk menghubungkannya.', isCorrect: true }, { text: 'Karena angka Host ID terakhirnya sama-sama .5 sehingga terjadi bentrok IP (IP Conflict).', isCorrect: false, misconception: 'Menganggap angka host terakhir yang sama selalu menyebabkan IP Conflict meskipun Network ID-nya berbeda.' }, { text: 'Karena kabel jaringan pada Switch tidak mendukung protokol ICMP (Ping).', isCorrect: false, misconception: 'Menyalahkan media fisik/kabel atas kegagalan komunikasi lapisan logis (Layer 3 Network).' }], remediation: 'Dengan prefix /24 (255.255.255.0), tiga angka pertama adalah Network ID. PC-A berada di jaringan 192.168.10.0, sedangkan PC-B di 192.168.20.0. Switch hanya bekerja di Layer 2 (satu jaringan sama); lintas jaringan wajib melewati Router.' },
+          { id: 'Q3', code: 'K-03', topic: 'Resolusi Nama Domain (DNS)', level: 2, diagram: 'dns_http', text: 'Saat siswa mengetik alamat portal sekolah di browser, muncul pesan "DNS_PROBE_FINISHED_NXDOMAIN", namun ketika diakses menggunakan alamat IP publik server secara langsung, halaman web dapat terbuka normal. Di mana letak gangguan utamanya?', options: [{ text: 'Layanan penerjemah nama domain ke alamat IP (DNS Server) mengalami gangguan atau salah konfigurasi.', isCorrect: true }, { text: 'Server web sekolah sedang mati total (down) atau kabel fiber optiknya putus.', isCorrect: false, misconception: 'Tidak mampu membedakan antara kegagalan resolusi nama (DNS) dengan kegagalan konektivitas server tujuan.' }, { text: 'Browser siswa tidak mendukung protokol keamanan HTTPS.', isCorrect: false, misconception: 'Mengaitkan galat NXDOMAIN (Non-Existent Domain) dengan sertifikat keamanan SSL/TLS.' }], remediation: 'Uji akses langsung via IP adalah teknik isolasi masalah paling cepat! Jika akses via IP berhasil, artinya jalur fisik, router, dan Web Server dalam kondisi sehat 100%. Masalahnya murni pada "buku telepon internet" yaitu DNS Server yang gagal menerjemahkan nama menjadi IP.' },
+          { id: 'Q4', code: 'K-04', topic: 'Logika Perulangan & Percabangan', level: 2, diagram: 'logic_loop', text: 'Perhatikan potongan kode Python pada diagram di samping. Fungsi range(1, 5) menghasilkan deret angka 1, 2, 3, 4. Berapakah nilai akhir variabel total yang dicetak ke layar?', options: [{ text: '6 (hasil penjumlahan bilangan genap 2 + 4)', isCorrect: true }, { text: '10 (hasil penjumlahan seluruh angka 1 + 2 + 3 + 4)', isCorrect: false, misconception: 'Mengabaikan blok kondisi seleksi (if i % 2 == 0) di dalam perulangan dan menjumlahkan seluruh iterasi.' }, { text: '12 (menganggap batas akhir range(1, 5) ikut dihitung hingga angka 5 + 6)', isCorrect: false, misconception: 'Miskonsepsi batas atas eksklusif pada fungsi range(start, stop) Python serta keliru mengidentifikasi bilangan genap.' }], remediation: 'Lakukan penelusuran (tracing) langkah demi langkah: range(1, 5) berhenti sebelum 5 (yaitu 1, 2, 3, 4). Syarat (i % 2 == 0) hanya meloloskan bilangan yang habis dibagi 2, yakni 2 dan 4. Maka total = 0 + 2 + 4 = 6.' },
+          { id: 'Q5', code: 'K-05', topic: 'Keamanan Jaringan & Enkripsi', level: 2, diagram: 'dns_http', text: 'Seorang siswa login ke aplikasi ujian sekolah melalui Wi-Fi publik menggunakan protokol HTTP biasa (tanpa S). Apa risiko keamanan paling krusial pada skenario ini?', options: [{ text: 'Username dan password dikirim dalam bentuk teks polos (plaintext) sehingga mudah disadap (sniffing) di jaringan.', isCorrect: true }, { text: 'Komputer siswa akan otomatis terkena virus ransomware begitu membuka halaman HTTP.', isCorrect: false, misconception: 'Menganggap protokol HTTP tanpa enkripsi otomatis menyuntikkan malware, padahal risiko utamanya adalah penyadapan data transit.' }, { text: 'Kecepatan internet menjadi jauh lebih lambat dibandingkan menggunakan HTTPS.', isCorrect: false, misconception: 'Keliru membalik fakta bahwa enkripsi TLS justru menambah sedikit overhead dibanding teks polos.' }], remediation: 'HTTP mengirimkan paket data secara terbuka layaknya kartu pos tanpa amplop—siapa pun di jalur Wi-Fi yang sama dapat membacanya menggunakan packet sniffer. HTTPS membungkus data tersebut dengan enkripsi TLS sehingga tidak terbaca oleh penyadap.' },
+          { id: 'Q6', code: 'K-06', topic: 'Analisis Bottleneck Jaringan', level: 3, diagram: 'subnet_mask', text: 'Sebuah lab komputer memiliki 30 PC yang terhubung ke Switch 100 Mbps, lalu Switch tersebut terhubung ke Router utama dengan paket internet 1 Gbps. Saat seluruh siswa mengunduh file lokal dari server lab secara bersamaan, kecepatan terasa sangat lambat. Apa penyebab utamanya?', options: [{ text: 'Kapasitas port Switch 100 Mbps menjadi leher botol (bottleneck) saat berbagi jalur untuk 30 PC sekaligus.', isCorrect: true }, { text: 'Paket internet 1 Gbps dari ISP tidak cukup untuk melayani 30 komputer.', isCorrect: false, misconception: 'Tidak membedakan lalu lintas jaringan lokal (LAN) dengan lalu lintas internet eksternal (WAN).' }, { text: 'Alamat IP lokal kelas C hanya mampu melayani maksimal 20 komputer aktif.', isCorrect: false, misconception: 'Salah memahami kapasitas alamat host pada subnet /24 (seharusnya 254 host usable).' }], remediation: 'Lalu lintas antar-PC dan server lokal tidak melewati internet (WAN), melainkan berputar di Switch lokal. Karena port Switch masih 100 Mbps (Fast Ethernet), jalur tersebut terbagi untuk 30 PC (~3,3 Mbps per PC). Solusinya adalah upgrade ke Gigabit Switch (1000 Mbps).' },
+          { id: 'Q7', code: 'K-07', topic: 'Troubleshooting NAT & Gateway', level: 3, diagram: 'ip_mac', text: 'Sebuah PC client berhasil melakukan ping ke IP Router Gateway (192.168.1.1) dan berhasil ping ke IP publik Google (8.8.8.8), tetapi gagal melakukan ping ke domain google.com. Konfigurasi apa yang terlewat pada PC client tersebut?', options: [{ text: 'Alamat DNS Server pada pengaturan TCP/IP client belum diisi atau salah.', isCorrect: true }, { text: 'Default Gateway pada PC client belum dikonfigurasi dengan benar.', isCorrect: false, misconception: 'Menganggap kegagalan akses domain disebabkan oleh Default Gateway, padahal keberhasilan ping ke 8.8.8.8 membuktikan Gateway & NAT sudah berfungsi normal.' }, { text: 'Kabel LAN antara PC client dan Router mengalami putus pada pin transmisi.', isCorrect: false, misconception: 'Mengabaikan bukti empiris bahwa koneksi Layer 1–3 ke IP publik 8.8.8.8 sudah sukses.' }], remediation: 'Baca gejala diagnostiknya secara berurutan: Ping 192.168.1.1 sukses = LAN sehat. Ping 8.8.8.8 sukses = Default Gateway & NAT internet sehat. Gagal ping nama domain = PC tidak tahu harus bertanya ke DNS Server mana untuk menerjemahkan nama domain.' },
+          { id: 'Q8', code: 'K-08', topic: 'Efisiensi Algoritma & Struktur Data', level: 3, diagram: 'logic_loop', text: 'Sebuah sistem pelacak alumni harus mencari data 1 alumni dari 100.000 rekaman yang sudah terurut berdasarkan NIM/NISN. Metode pencarian manakah yang paling efisien secara komputasi?', options: [{ text: 'Binary Search (Pencarian Bagi Dua), karena membagi ruang pencarian menjadi separuh di setiap langkah.', isCorrect: true }, { text: 'Linear Search (Pencarian Beruntun), karena selalu lebih cepat pada data yang sudah terurut.', isCorrect: false, misconception: 'Tidak memanfaatkan sifat data yang sudah terurut sehingga tetap memeriksa data satu per satu dari awal (kompleksitas O(n)).' }, { text: 'Bubble Sort, karena algoritma pengurutan otomatis menemukan data tercepat.', isCorrect: false, misconception: 'Tertukar antara algoritma pengurutan (sorting) dengan algoritma pencarian (searching).' }], remediation: 'Pada data yang sudah terurut, Binary Search bekerja seperti membuka kamus dari bagian tengah: sekali tebak langsung membuang 50.000 data yang tidak relevan! Dari 100.000 data, pencarian hanya butuh maksimal ~17 langkah dibanding 100.000 langkah pada Linear Search.' }
+        ]
+      },
+      matematika: {
+        id: 'matematika', title: 'Aljabar & Persamaan Linear Satu Variabel (SMP / MTs)', subject: 'Matematika',
+        questions: [
+          { id: 'M1', code: 'MAT-01', topic: 'Sifat Distributif Aljabar', level: 1, diagram: 'math_linear', text: 'Perhatikan persamaan 3(x - 2) = 15 pada ilustrasi di samping. Langkah penjabaran ruas kiri yang paling tepat adalah...', options: [{ text: '3x - 6 = 15 (mengalikan 3 dengan x dan 3 dengan -2)', isCorrect: true }, { text: '3x - 2 = 15 (hanya mengalikan angka 3 dengan variabel x di depan)', isCorrect: false, misconception: 'Miskonsepsi distribusi parsial: lupa mengalikan konstanta di luar kurung dengan suku kedua di dalam kurung.' }, { text: '3x + 6 = 15 (keliru mengubah tanda negatif menjadi positif saat dikalikan bilangan positif)', isCorrect: false, misconception: 'Kesalahan operasi tanda bilangan bulat (positif dikali negatif dianggap positif).' }], remediation: 'Tanda kurung berarti seluruh isi di dalamnya adalah satu paket yang dikalikan 3. Jadi 3 dikali x menjadi 3x, dan 3 dikali (-2) menjadi -6. Hasil penjabarannya adalah 3x - 6 = 15.' },
+          { id: 'M2', code: 'MAT-02', topic: 'Penyelesaian Persamaan Linear', level: 2, diagram: 'math_linear', text: 'Jika 3x - 6 = 15, berapakah nilai x yang memenuhi persamaan tersebut?', options: [{ text: 'x = 7', isCorrect: true }, { text: 'x = 3', isCorrect: false, misconception: 'Mengurangkan 15 dengan 6 (15 - 6 = 9, lalu dibagi 3) karena tidak membalik operasi saat menyetarakan kedua ruas.' }, { text: 'x = 21', isCorrect: false, misconception: 'Berhenti pada langkah penjumlahan konstanta (15 + 6 = 21) dan lupa membagi dengan koefisien 3.' }], remediation: 'Untuk menghilangkan -6 di ruas kiri, tambahkan +6 pada kedua ruas sehingga 3x = 15 + 6 = 21. Selanjutnya bagi kedua ruas dengan 3: x = 21 / 3 = 7.' },
+          { id: 'M3', code: 'MAT-03', topic: 'Pemodelan Masalah Kontekstual', level: 2, diagram: 'math_linear', text: 'Harga 2 buku tulis dan 1 pulpen Rp5.000 adalah Rp17.000. Jika harga satu buku tulis dimisalkan b, model matematika yang tepat adalah...', options: [{ text: '2b + 5.000 = 17.000', isCorrect: true }, { text: '2b + b = 17.000', isCorrect: false, misconception: 'Menggunakan variabel yang sama untuk dua jenis barang yang berbeda.' }, { text: '2(b + 5.000) = 17.000', isCorrect: false, misconception: 'Menganggap jumlah pulpen juga sebanyak 2 buah seperti jumlah buku tulis.' }], remediation: 'Terjemahkan kalimat satu per satu: 2 buku tulis = 2b, ditambah 1 pulpen seharga 5.000 = + 5.000, totalnya 17.000. Maka persamaannya adalah 2b + 5.000 = 17.000.' },
+          { id: 'M4', code: 'MAT-04', topic: 'Analisis Pertidaksamaan Linear', level: 3, diagram: 'math_linear', text: 'Diketahui pertidaksamaan -2x > 10. Himpunan penyelesaian untuk nilai x adalah...', options: [{ text: 'x < -5 (tanda pertidaksamaan berbalik arah karena dibagi bilangan negatif)', isCorrect: true }, { text: 'x > -5 (mempertahankan arah tanda > meskipun membagi kedua ruas dengan -2)', isCorrect: false, misconception: 'Lupa membalik tanda pertidaksamaan saat mengalikan atau membagi kedua ruas dengan bilangan negatif.' }, { text: 'x < 5 (menghilangkan tanda negatif pada hasil pembagian 10 / -2)', isCorrect: false, misconception: 'Keliru menentukan tanda hasil pembagian bilangan positif dengan negatif.' }], remediation: 'Aturan emas pertidaksamaan: setiap kali kedua ruas dikali atau dibagi dengan bilangan NEGATIF (dalam hal ini -2), tanda pertidaksamaan wajib berbalik arah dari > menjadi <. Jadi x < -5.' }
+        ]
+      },
+      ipa: {
+        id: 'ipa', title: 'Listrik Dinamis & Rangkaian Sederhana (SD / SMP)', subject: 'Ilmu Pengetahuan Alam (IPA)',
+        questions: [
+          { id: 'I1', code: 'IPA-01', topic: 'Rangkaian Listrik Seri', level: 1, diagram: 'science_circuit', text: 'Perhatikan rangkaian listrik seri pada diagram di samping. Jika filamen lampu L1 putus, apa yang terjadi pada lampu L2?', options: [{ text: 'Lampu L2 ikut padam karena rangkaian menjadi terbuka dan arus listrik terhenti.', isCorrect: true }, { text: 'Lampu L2 menyala semakin terang karena seluruh energi baterai pindah ke L2.', isCorrect: false, misconception: 'Menganggap aliran listrik tetap dapat melompati komponen yang putus pada jalur seri tunggal.' }, { text: 'Lampu L2 tetap menyala normal seperti sebelumnya.', isCorrect: false, misconception: 'Tertukar antara sifat rangkaian paralel (bercabang) dengan rangkaian seri (satu jalur).' }], remediation: 'Pada rangkaian seri hanya tersedia SATU jalur lintasan arus listrik. Jika L1 putus, jalur tersebut terputus seperti jembatan yang roboh sehingga arus listrik tidak dapat mengalir ke L2.' },
+          { id: 'I2', code: 'IPA-02', topic: 'Konsep Arus Listrik (Attenuation Model)', level: 2, diagram: 'science_circuit', text: 'Pada rangkaian seri dengan dua lampu identik L1 dan L2, bagaimana perbandingan besar kuat arus listrik yang mengalir melewati L1 dibandingkan L2?', options: [{ text: 'Kuat arus di L1 sama besar dengan kuat arus di L2.', isCorrect: true }, { text: 'Kuat arus di L1 lebih besar karena letaknya lebih dekat dengan kutub positif baterai.', isCorrect: false, misconception: 'Miskonsepsi "arus habis terpakai": mengira muatan listrik berkurang setelah melewati lampu pertama.' }, { text: 'Kuat arus di L2 lebih besar karena menampung sisa arus dari L1.', isCorrect: false, misconception: 'Keliru memahami hukum kekekalan muatan pada rangkaian tertutup.' }], remediation: 'Arus listrik bukanlah bahan bakar yang habis terbakar di lampu pertama. Yang diubah menjadi cahaya adalah ENERGI listriknya, sedangkan jumlah elektron yang mengalir (kuat arus) di sepanjang jalur seri selalu SAMA BESAR.' },
+          { id: 'I3', code: 'IPA-03', topic: 'Konduktor dan Isolator', level: 1, diagram: 'science_circuit', text: 'Mengapa kabel listrik tembaga selalu dilapisi dengan pembungkus berbahan plastik atau karet PVC?', options: [{ text: 'Plastik bersifat isolator sehingga mencegah arus listrik bocor atau menyengat saat disentuh.', isCorrect: true }, { text: 'Plastik mempercepat aliran elektron di dalam kawat tembaga.', isCorrect: false, misconception: 'Menganggap lapisan luar kabel berfungsi mempercepat hantaran listrik.' }, { text: 'Plastik mengubah arus bolak-balik (AC) menjadi arus searah (DC).', isCorrect: false, misconception: 'Tertukar antara fungsi bahan isolator dengan komponen penyearah (dioda/adaptor).' }], remediation: 'Tembaga adalah konduktor yang sangat baik menghantarkan listrik, sedangkan plastik/karet adalah isolator yang menghambat aliran elektron agar aman bagi manusia dan mencegah korsleting.' },
+          { id: 'I4', code: 'IPA-04', topic: 'Hukum Ohm Terapan', level: 3, diagram: 'science_circuit', text: 'Sebuah rangkaian tertutup memiliki tegangan baterai 12 Volt dan total hambatan 4 Ohm. Jika tegangan baterai dinaikkan menjadi 24 Volt dengan hambatan tetap, bagaimana perubahan kuat arusnya?', options: [{ text: 'Kuat arus menjadi dua kali lipat lebih besar (dari 3 Ampere menjadi 6 Ampere).', isCorrect: true }, { text: 'Kuat arus menjadi setengahnya (1,5 Ampere) karena hambatan menahan tegangan lebih besar.', isCorrect: false, misconception: 'Mengira kuat arus berbanding terbalik dengan tegangan sumber.' }, { text: 'Kuat arus tetap 3 Ampere selama hambatannya tidak diubah.', isCorrect: false, misconception: 'Mengabaikan pengaruh besar tegangan (V) terhadap kuat arus (I) dalam rumus I = V / R.' }], remediation: 'Berdasarkan Hukum Ohm (I = V / R), kuat arus berbanding lurus dengan tegangan. Awalnya I = 12V / 4Ω = 3A. Saat tegangan digandakan menjadi 24V, maka I = 24V / 4Ω = 6A.' }
+        ]
+      }
+    };
+
+    let currentPack = JSON.parse(JSON.stringify(PRESET_PACKAGES.tkj));
+    let studentState = { name: '', className: '', currentIndex: 0, currentLevel: 1, selectedOptionIdx: null, isRemediationRetry: false, logs: [] };
+    let classRecords = generateSimulatedRecords(currentPack);
+
+    function generateSimulatedRecords(pack) {
+      const names = ["Ahmad Fauzi", "Nadia Putri", "Deni Kurniawan", "Siti Aisyah", "Fajar Nugraha", "Rina Marlina", "Ilham Ramadhan", "Dewi Sartika", "Galih Pratama", "Anisa Fitri", "Bagas Saputra", "Fitriani", "Rendi Hermawan", "Putri Amelia", "Yusuf Maulana", "Neng Wulan", "Arif Hidayat", "Salsa Bila", "Reza Pahlevi", "Maya Sari", "Dika Permana", "Intan Nuraini", "Hendra Gunawan", "Lutfi Hakim", "Tia Rahmawati", "Agung Setiawan", "Rismawati", "Bayu Anggara", "Novianti", "Rizki Ananda", "Zulfa Khoirunnisa"];
+      return names.map((name, idx) => {
+        const profile = idx % 10;
+        const itemStatuses = pack.questions.map((q, qIdx) => {
+          if (profile <= 3) { return { code: q.code, topic: q.topic, status: 'mastered', misconception: null }; } 
+          else if (profile <= 7) {
+            if ((idx + qIdx) % 3 === 0) {
+              const wrongOpt = q.options.find(o => !o.isCorrect);
+              return { code: q.code, topic: q.topic, status: 'remediated', misconception: wrongOpt ? wrongOpt.misconception : 'Miskonsepsi konsep' };
+            }
+            return { code: q.code, topic: q.topic, status: 'mastered', misconception: null };
+          } else {
+            if ((idx + qIdx) % 2 === 0) {
+              const wrongOpt = q.options.find(o => !o.isCorrect);
+              return { code: q.code, topic: q.topic, status: 'misconception', misconception: wrongOpt ? wrongOpt.misconception : 'Miskonsepsi konsep' };
+            }
+            return { code: q.code, topic: q.topic, status: 'remediated', misconception: null };
+          }
+        });
+        const masteredCount = itemStatuses.filter(s => s.status === 'mastered').length;
+        const remediatedCount = itemStatuses.filter(s => s.status === 'remediated').length;
+        const score = Math.round(((masteredCount * 1 + remediatedCount * 0.75) / pack.questions.length) * 100);
+        const firstMisc = itemStatuses.find(s => s.misconception)?.misconception || 'Tidak ada miskonsepsi';
+        return { name, score, itemStatuses, mainMisconception: firstMisc };
+      });
+    }
+
+    const SOLUSI = [
+      {c:'Pembelajaran', t:'Pembelajaran mendalam terasa berat dimulai', why:'Konsepnya baru dan guru belum punya contoh yang cocok dengan kelasnya.', steps:['Mulai dari satu topik per bulan, bukan semua mata pelajaran.','Rancang tiga hal: siswa sadar tujuan, materi bermakna, suasana menyenangkan.','Tutup setiap topik dengan satu pertanyaan refleksi.'], app:['siswa','Coba diagnosa awal topik']},
+      {c:'Pembelajaran', t:'Kemampuan siswa dalam satu kelas sangat beragam', why:'Satu cara mengajar tidak menjangkau semua siswa.', steps:['Gunakan hasil diagnosa untuk membagi kelompok pengayaan, penguatan, dan pendampingan.','Beri tugas inti yang sama dengan tingkat bantuan berbeda.','Ganti kelompok setiap topik agar tidak melabeli siswa.'], app:['analitik','Lihat pengelompokan otomatis']},
+      {c:'Asesmen', t:'Asesmen formatif sulit dilakukan rutin', why:'Koreksi manual menyita waktu, sehingga hasilnya terlambat dipakai.', steps:['Pakai diagnosa singkat 10 menit sebelum topik baru.','Baca miskonsepsi terbanyak, lalu perbaiki di pertemuan berikutnya.','Simpan catatan hasil sebagai bahan rapor dan refleksi.'], app:['siswa','Mulai diagnosa singkat']},
+      {c:'Asesmen', t:'Siswa lemah bernalar dan memahami soal', why:'Latihan terlalu berfokus pada hafalan, bukan pada alasan di balik jawaban.', steps:['Tambahkan satu soal bernalar di setiap pertemuan.','Minta siswa menjelaskan mengapa pilihan lain keliru.','Gunakan kartu remediasi 30 detik untuk meluruskan konsep.'], app:['authoring','Buat soal bernalar sendiri']},
+      {c:'Administrasi', t:'Beban administrasi menyita waktu mengajar', why:'Dokumen yang terpisah-pisah memaksa guru menulis hal yang sama berulang.', steps:['Satukan tujuan, asesmen, dan tindak lanjut dalam satu modul ajar ringkas.','Cetak laporan kelas langsung dari dasbor, tidak menyalin ulang.','Sepakati format minimal bersama kepala sekolah.'], app:['analitik','Cetak laporan PDF']},
+      {c:'Infrastruktur', t:'Internet dan perangkat terbatas', why:'Banyak sekolah belum punya jaringan stabil atau komputer cukup.', steps:['Soal dan penilaian diproses di perangkat, jadi cukup satu koneksi untuk membuka halaman.','Gunakan bergiliran di HP, laptop, atau satu proyektor.','Cetak hasil untuk siswa yang tidak membawa perangkat.'], app:['siswa','Jalankan sesi uji']},
+      {c:'Karakter', t:'Kokurikuler dan profil lulusan sulit diukur', why:'Dimensi karakter bersifat luas, sedangkan waktu dan rubrik terbatas.', steps:['Pilih satu proyek sederhana yang menyatu dengan topik pelajaran.','Nilai dengan rubrik tiga tingkat yang singkat.','Kumpulkan bukti kecil: foto, catatan, atau refleksi siswa.'], app:['authoring','Susun paket soal proyek']},
+      {c:'Guru', t:'Pelatihan dan berbagi praktik masih minim', why:'Jadwal pelatihan jarang, dan praktik baik berhenti di satu kelas.', steps:['Adakan pertemuan 45 menit setiap dua minggu di KKG atau MGMP.','Bagikan paket soal yang sudah teruji lewat fitur impor.','Bergantian mengamati kelas dan memberi umpan balik singkat.'], app:['authoring','Impor atau bagikan paket soal']}
+    ];
+    const SOLUSI_CATS = ['Semua','Pembelajaran','Asesmen','Administrasi','Infrastruktur','Karakter','Guru'];
+    function renderSolusi(cat) {
+      cat = cat || 'Semua';
+      document.getElementById('solusi-filters').innerHTML = SOLUSI_CATS.map(c =>
+        `<button type="button" onclick="renderSolusi('${c}')" aria-pressed="${c===cat}" class="px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-colors ${c===cat ? 'bg-indigo-900 text-white border-indigo-900' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'}">${c}</button>`).join('');
+      document.getElementById('solusi-list').innerHTML = SOLUSI.filter(s => cat==='Semua' || s.c===cat).map(s => `
+        <details class="solusi bg-white rounded-2xl border border-slate-200 print-card">
+          <summary class="flex items-center justify-between gap-4 p-4 sm:p-5">
+            <div><div class="text-xs font-semibold text-indigo-700">${s.c}</div><h3 class="text-sm sm:text-base font-bold text-slate-900">${s.t}</h3></div>
+            <svg class="chev w-4 h-4 text-slate-400 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-4 sm:px-5 pb-5 space-y-3 text-sm text-slate-700">
+            <p><strong class="text-slate-900">Penyebab:</strong> ${s.why}</p>
+            <ul class="list-disc pl-5 space-y-1">${s.steps.map(x=>`<li>${x}</li>`).join('')}</ul>
+            <button type="button" onclick="switchMode('${s.app[0]}')" class="no-print px-4 py-2 rounded-xl bg-indigo-900 hover:bg-indigo-800 text-white text-xs font-semibold">${s.app[1]}</button>
+          </div>
+        </details>`).join('');
+    }
+    renderSolusi();
+
+    const FAQ = [
+      {q:'Apa itu Diagnosa Belajar?', a:'Aplikasi asesmen diagnostik yang menilai jawaban siswa sekaligus mencari pola miskonsepsi di baliknya. Setelah menjawab, siswa mendapat kartu remediasi 30 detik, dan tingkat kesulitan soal berikutnya menyesuaikan.'},
+      {q:'Bagaimana siswa memulai sesi?', a:'Buka Uji Siswa, isi nama dan kelas, lalu pilih Mulai Diagnosa Sekarang. Siswa memilih satu jawaban, memeriksanya, membaca umpan balik, lalu lanjut ke soal berikutnya.'},
+      {q:'Bagaimana soal menyesuaikan kemampuan siswa?', a:'Soal tersusun dalam tiga level: konsep dasar, analisis dan penerapan, serta pemecahan masalah. Setelah jawaban salah, siswa membaca kartu remediasi lalu mengerjakan soal verifikasi untuk memastikan konsepnya sudah benar.'},
+      {q:'Apakah indeks penguasaan sama dengan nilai rapor?', a:'Bukan. Indeks ini gambaran diagnostik untuk menentukan tindak lanjut pembelajaran. Nilai rapor tetap mengikuti penilaian dan ketentuan sekolah.'},
+      {q:'Bagaimana membuat atau membagikan paket soal?', a:'Buka Bank Soal untuk menambah butir soal. Untuk berbagi, pilih Salin JSON Paket Soal lalu kirim ke rekan guru. Penerima menempelkan kodenya di kolom Impor Paket Soal JSON.'},
+      {q:'Apa isi Dasbor Guru?', a:'Dasbor menampilkan rata-rata penguasaan, miskonsepsi terbanyak, rekomendasi tiga kelompok pembelajaran, dan peta panas per siswa. Tombol Data simulasi membantu Anda melihat contoh tampilannya, dan Tarik Data dari Cloud mengambil hasil siswa dari Firebase.'},
+      {q:'Apakah hasil siswa tersimpan permanen?', a:'Ya. Hasil tersimpan otomatis di browser perangkat ini dan juga dikirim ke Firebase (cloud) bila siswa memasukkan kode kelas dari guru, sehingga guru dapat menariknya dari perangkat lain lewat Dasbor Guru. Anda juga bisa mengunduh CSV atau mencetak laporan PDF.'},
+      {q:'Apakah perlu internet?', a:'Penilaian diproses di perangkat Anda. Koneksi internet dibutuhkan untuk memuat tampilan dan huruf, serta untuk mengirim dan menarik hasil siswa dari Firebase. Tanpa internet, hasil tetap tersimpan di perangkat.'},
+      {q:'Apakah aplikasi ini sesuai Kurikulum Merdeka?', a:'Aplikasi ini mendukung asesmen diagnostik dan pembelajaran berdiferensiasi yang menjadi bagian praktik Kurikulum Merdeka. Untuk ketentuan resmi, rujuk edaran terbaru Kemendikdasmen dan kebijakan sekolah Anda.'}
+    ];
+    document.getElementById('faq-list').innerHTML = FAQ.map(f => `
+      <details class="solusi bg-white rounded-2xl border border-slate-200 print-card h-full">
+        <summary class="flex items-center justify-between gap-4 p-4 sm:p-5">
+          <h3 class="text-sm sm:text-base font-bold text-slate-900">${f.q}</h3>
+          <svg class="chev w-4 h-4 text-slate-400 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </summary>
+        <p class="px-4 sm:px-5 pb-5 text-sm text-slate-700 leading-relaxed">${f.a}</p>
+      </details>`).join('');
+
+    const GUIDES = {
+      siswa: {w:'max-w-4xl', t:'Panduan singkat: sesi siswa', s:['Isi nama dan kelas siswa, lalu tekan Mulai Diagnosa Sekarang.','Siswa membaca soal dan diagram, memilih satu jawaban, lalu menekan Periksa & Analisis Jawaban.','Baca kartu remediasi 30 detik. Jika ada miskonsepsi, kartu ini menjelaskan letak kekeliruannya.','Tekan lanjut. Soal berikutnya menyesuaikan jawaban sebelumnya. Di akhir muncul profil kognitif siswa.'], n:'Ganti materi lewat pilihan Paket soal di bagian atas halaman, sebelum sesi dimulai.'},
+      analitik: {w:'', t:'Panduan singkat: membaca dasbor', s:['Belum ada data? Data simulasi contoh tampil otomatis, atau tekan Tarik Data dari Cloud untuk hasil siswa nyata.','Mulai dari empat kartu ringkasan: jumlah siswa, rata-rata penguasaan, miskonsepsi teratasi, dan siswa yang butuh pendampingan.','Lihat topik dengan batang terpendek dan daftar miskonsepsi teratas. Itulah bahan yang perlu diluruskan lebih dulu.','Gunakan tiga kelompok pembelajaran sebagai dasar membagi tugas. Hijau pada peta panas berarti paham, kuning paham setelah remediasi, merah masih keliru.'], n:'Hasil tersimpan di perangkat ini dan di Firebase. Tekan Cetak Laporan PDF atau Unduh CSV bila perlu arsip.'},
+      authoring: {w:'', t:'Panduan singkat: bank soal', s:['Pilih paket yang sedang aktif, atau tambahkan butir soal baru ke paket tersebut.','Tulis pertanyaan dan pilihan jawaban, lalu tandai jawaban yang benar.','Pada setiap pilihan yang salah, tulis miskonsepsi yang mungkin melatarbelakanginya. Dari sinilah sistem mengenali pola kekeliruan siswa.','Untuk berbagi, tekan Salin JSON Paket Soal lalu kirim ke rekan guru. Penerima menempelkannya di kolom Impor.'], n:'Mulai dari 4 sampai 8 butir soal per topik agar sesi tetap singkat.'}
+    };
+    Object.entries(GUIDES).forEach(([k,g]) => {
+      const el = document.getElementById('view-' + k);
+      if (!el) return;
+      el.insertAdjacentHTML('afterbegin', `
+        <details class="guide no-print ${g.w} ${g.w ? 'mx-auto w-full' : ''} bg-indigo-50 border border-indigo-100 rounded-2xl" open>
+          <summary class="flex items-center justify-between gap-3 p-4 sm:p-5">
+            <span class="text-sm font-bold text-indigo-900">${g.t}</span>
+            <svg class="chev w-4 h-4 text-indigo-700 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-4 sm:px-5 pb-5 space-y-3 text-sm text-slate-700">
+            <ol class="list-decimal pl-5 space-y-1.5">${g.s.map(x => `<li>${x}</li>`).join('')}</ol>
+            <p class="text-xs text-slate-600"><strong class="text-slate-800">Catatan:</strong> ${g.n} Butuh penjelasan istilah? Buka menu FAQ.</p>
+          </div>
+        </details>`);
+    });
+
+    const GLOSARIUM = [
+      ['Miskonsepsi','Pemahaman keliru yang konsisten, bukan sekadar salah hitung atau salah ketik. Biasanya berasal dari pilihan jawaban yang menggoda.'],
+      ['Remediasi mikro','Penjelasan singkat sekitar 30 detik yang langsung muncul setelah jawaban salah, untuk meluruskan konsep saat itu juga.'],
+      ['Soal verifikasi','Soal pengganti setelah remediasi, untuk memastikan konsep sudah benar-benar dipahami.'],
+      ['Indeks penguasaan konsep','Persentase pemahaman siswa dari seluruh sesi. Dipakai sebagai petunjuk tindak lanjut, bukan nilai akhir.'],
+      ['Peta panas','Tabel warna siswa terhadap topik: hijau paham utuh, kuning paham setelah remediasi, merah masih miskonsepsi.'],
+      ['Pembelajaran berdiferensiasi','Menyesuaikan kegiatan belajar dengan kebutuhan siswa. Di sini ada tiga kelompok: pengayaan, penguatan, dan pendampingan intensif.']
+    ];
+    document.getElementById('faq-list').insertAdjacentHTML('afterend', `
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 print-card mt-6">
+        <h3 class="text-base font-bold text-slate-900 mb-3">Istilah penting</h3>
+        <dl class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">${GLOSARIUM.map(([t,d]) => `<div><dt class="font-bold text-slate-900">${t}</dt><dd class="text-slate-600">${d}</dd></div>`).join('')}</dl>
+      </div>`);
+
+    let _dirty = false;
+    const _ss = startStudentSession, _ls = loadSimulatedClassData, _sm = switchMode;
+    startStudentSession = function () { _dirty = true; return _ss.apply(this, arguments); };
+    loadSimulatedClassData = function () { _dirty = true; return _ls.apply(this, arguments); };
+    switchMode = function (m) {
+      _sm(m);
+      const b = document.getElementById('nav-' + m);
+      if (b && b.scrollIntoView) b.scrollIntoView({inline:'center', block:'nearest'});
+      window.scrollTo({top:0});
+    };
+
+    function switchMode(mode) {
+      ['siswa', 'analitik', 'authoring', 'solusi', 'faq'].forEach(m => {
+        document.getElementById(`view-${m}`).classList.add('hidden');
+        const navBtn = document.getElementById(`nav-${m}`);
+        navBtn.classList.remove('tab-active');
+        navBtn.classList.add('text-slate-600');
+      });
+
+      document.getElementById(`view-${mode}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`nav-${mode}`);
+      activeBtn.classList.add('tab-active');
+      activeBtn.classList.remove('text-slate-600');
+
+      if (mode === 'analitik') renderAnalyticsDashboard();
+      if (mode === 'authoring') renderAuthoringList();
+    }
+
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById('toast-box');
+      document.getElementById('toast-message').textContent = msg;
+      box.classList.remove('hidden');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => box.classList.add('hidden'), 3600);
+    }
+
+    function loadPresetPackage(presetKey) {
+      if (!PRESET_PACKAGES[presetKey]) return;
+      currentPack = JSON.parse(JSON.stringify(PRESET_PACKAGES[presetKey]));
+      rebuildRecords();
+      updateHeaderPackInfo();
+      resetStudentSession();
+      renderAnalyticsDashboard();
+      renderAuthoringList();
+      showToast(`Paket soal "${currentPack.title}" berhasil dimuat.`);
+    }
+
+    function updateHeaderPackInfo() {
+      document.getElementById('active-pack-title').textContent = currentPack.title;
+      document.getElementById('active-pack-meta').textContent = `${currentPack.questions.length} Butir Diagnostik • 3 Level Kognitif`;
+    }
+
+    function startStudentSession() {
+      const nameInput = document.getElementById('student-name').value.trim() || 'Siswa Peserta';
+      const classInput = document.getElementById('student-class').value.trim() || 'Kelas Umum';
+
+      studentState = {
+        name: nameInput,
+        className: classInput,
+        currentIndex: 0,
+        currentLevel: currentPack.questions[0]?.level || 1,
+        selectedOptionIdx: null,
+        isRemediationRetry: false,
+        logs: []
+      };
+
+      document.getElementById('student-intro-card').classList.add('hidden');
+      document.getElementById('student-result-card').classList.add('hidden');
+      document.getElementById('student-quiz-area').classList.remove('hidden');
+      document.getElementById('display-student-info').textContent = `${studentState.name} (${studentState.className})`;
+
+      renderCurrentQuestion();
+    }
+
+    function resetStudentSession() {
+      document.getElementById('student-quiz-area').classList.add('hidden');
+      document.getElementById('student-result-card').classList.add('hidden');
+      document.getElementById('student-intro-card').classList.remove('hidden');
+    }
+
+    function renderCurrentQuestion() {
+      const q = currentPack.questions[studentState.currentIndex];
+      studentState.selectedOptionIdx = null;
+
+      document.getElementById('diagnostic-feedback-card').classList.add('hidden');
+      const submitBtn = document.getElementById('btn-submit-answer');
+      submitBtn.disabled = true;
+      submitBtn.classList.remove('hidden');
+
+      document.getElementById('q-counter').textContent = `${studentState.currentIndex + 1}/${currentPack.questions.length}`;
+      document.getElementById('q-topic-badge').textContent = `Topik: ${q.topic}`;
+      document.getElementById('q-competency-code').textContent = `Kompetensi: ${q.code}`;
+      document.getElementById('q-text').textContent = q.text;
+
+      const remTag = document.getElementById('q-remedial-tag');
+      if (studentState.isRemediationRetry) {
+        remTag.classList.remove('hidden');
+      } else {
+        remTag.classList.add('hidden');
+      }
+
+      const lvl = q.level || 1;
+      const lvlNames = {
+        1: 'Level 1 — Konsep Dasar',
+        2: 'Level 2 — Analisis Terapan',
+        3: 'Level 3 — Pemecahan Masalah'
+      };
+      document.getElementById('adaptive-level-label').textContent = lvlNames[lvl] || lvlNames[1];
+      const bars = document.getElementById('level-bars').children;
+      for (let i = 0; i < 3; i++) {
+        bars[i].className = i < lvl
+          ? (lvl === 3 ? 'w-3 h-7 rounded-sm bg-emerald-600' : 'w-3 h-7 rounded-sm bg-indigo-600')
+          : 'w-3 h-7 rounded-sm bg-slate-200';
+      }
+
+      const diagBox = document.getElementById('q-diagram-container');
+      diagBox.innerHTML = SVG_DIAGRAMS[q.diagram] || conceptCard(q);
+
+      const optionsContainer = document.getElementById('q-options');
+      optionsContainer.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'option-btn w-full text-left p-3.5 rounded-xl border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/40 transition-all flex items-start gap-3 cursor-pointer';
+        btn.innerHTML = `
+          <span class="w-6 h-6 rounded-lg bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 border border-slate-200">${letters[idx]}</span>
+          <span class="text-xs sm:text-sm text-slate-800 leading-relaxed">${esc(opt.text)}</span>
+        `;
+        btn.onclick = () => selectOption(idx, btn);
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    function selectOption(idx, btnEl) {
+      if (!document.getElementById('diagnostic-feedback-card').classList.contains('hidden')) return;
+      studentState.selectedOptionIdx = idx;
+
+      document.querySelectorAll('.option-btn').forEach(el => {
+        el.classList.remove('border-indigo-600', 'bg-indigo-50', 'ring-2', 'ring-indigo-200');
+      });
+      btnEl.classList.add('border-indigo-600', 'bg-indigo-50', 'ring-2', 'ring-indigo-200');
+      document.getElementById('btn-submit-answer').disabled = false;
+    }
+
+    function submitStudentAnswer() {
+      if (studentState.selectedOptionIdx === null) return;
+      const q = currentPack.questions[studentState.currentIndex];
+      const chosen = q.options[studentState.selectedOptionIdx];
+
+      document.getElementById('btn-submit-answer').classList.add('hidden');
+
+      const fbCard = document.getElementById('diagnostic-feedback-card');
+      const fbIcon = document.getElementById('diag-icon');
+      const fbBadge = document.getElementById('diag-status-badge');
+      const fbTitle = document.getElementById('diag-title');
+      const miscBox = document.getElementById('diag-misconception-box');
+      const miscText = document.getElementById('diag-misconception-text');
+      const remText = document.getElementById('diag-remediation-text');
+      const nextHint = document.getElementById('diag-next-step-hint');
+      const nextBtnLabel = document.getElementById('btn-next-label');
+
+      fbCard.classList.remove('hidden', 'border-emerald-300', 'bg-emerald-50/40', 'border-rose-300', 'bg-rose-50/40');
+
+      if (chosen.isCorrect) {
+        fbCard.classList.add('border-emerald-300', 'bg-emerald-50/40');
+        fbIcon.className = 'w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 mt-0.5 font-bold';
+        fbIcon.innerHTML = '&#10003;';
+        fbBadge.className = 'text-[11px] font-extrabold uppercase tracking-wider text-emerald-700';
+        fbBadge.textContent = studentState.isRemediationRetry ? 'REMEDIASI BERHASIL • KONSEP TERVERIFIKASI' : 'PEMAHAMAN UTUH TERVERIFIKASI';
+        fbTitle.textContent = 'Tepat! Konsep Anda Sudah Sesuai';
+        miscBox.classList.add('hidden');
+        remText.textContent = q.remediation;
+
+        const existingLog = studentState.logs.find(l => l.code === q.code);
+        if (existingLog) {
+          existingLog.status = 'remediated';
+        } else {
+          studentState.logs.push({
+            code: q.code,
+            topic: q.topic,
+            status: 'mastered',
+            misconception: null
+          });
+        }
+
+        studentState.isRemediationRetry = false;
+        const isLast = studentState.currentIndex >= currentPack.questions.length - 1;
+        nextHint.textContent = isLast
+          ? 'Seluruh butir diagnostik telah selesai. Klik tombol di bawah untuk melihat Profil Kognitif Anda.'
+          : 'Mesin Adaptif: Pemahaman terkonfirmasi. Melanjutkan ke tingkat tantangan berikutnya.';
+        nextBtnLabel.textContent = isLast ? 'Lihat Rapor Diagnostik Saya' : 'Lanjutkan ke Soal Berikutnya';
+
+      } else {
+        fbCard.classList.add('border-rose-300', 'bg-rose-50/40');
+        fbIcon.className = 'w-9 h-9 rounded-xl bg-rose-600 text-white flex items-center justify-center shrink-0 mt-0.5 font-bold';
+        fbIcon.innerHTML = '!';
+        fbBadge.className = 'text-[11px] font-extrabold uppercase tracking-wider text-rose-700';
+        fbBadge.textContent = 'DETEKSI MISKONSEPSI KOGNITIF';
+        fbTitle.textContent = 'Teridentifikasi Kekeliruan Konsep';
+        miscBox.classList.remove('hidden');
+        miscText.textContent = chosen.misconception || 'Terjadi kekeliruan dalam menghubungkan konsep dasar dengan studi kasus.';
+        remText.textContent = q.remediation;
+
+        const existingLog = studentState.logs.find(l => l.code === q.code);
+        if (!existingLog) {
+          studentState.logs.push({
+            code: q.code,
+            topic: q.topic,
+            status: 'misconception',
+            misconception: chosen.misconception
+          });
+        }
+
+        if (!studentState.isRemediationRetry) {
+          studentState.isRemediationRetry = true;
+          nextHint.textContent = 'Mesin Adaptif: Silakan pahami Kartu Remediasi Mikro di atas, lalu uji kembali pemahaman Anda pada konsep ini.';
+          nextBtnLabel.textContent = 'Uji Verifikasi Ulang Konsep Ini';
+        } else {
+          studentState.isRemediationRetry = false;
+          const isLast = studentState.currentIndex >= currentPack.questions.length - 1;
+          nextHint.textContent = 'Sistem mencatat topik ini sebagai prioritas pendampingan guru di kelas.';
+          nextBtnLabel.textContent = isLast ? 'Lihat Rapor Diagnostik Saya' : 'Lanjutkan ke Butir Berikutnya';
+        }
+      }
+    }
+
+    function proceedNextQuestion() {
+      if (studentState.isRemediationRetry) {
+        renderCurrentQuestion();
+        return;
+      }
+      if (studentState.currentIndex < currentPack.questions.length - 1) {
+        studentState.currentIndex++;
+        renderCurrentQuestion();
+      } else {
+        finishStudentSession();
+      }
+    }
+
+    function finishStudentSession() {
+      document.getElementById('student-quiz-area').classList.add('hidden');
+      document.getElementById('student-result-card').classList.remove('hidden');
+
+      const total = currentPack.questions.length;
+      const mastered = studentState.logs.filter(l => l.status === 'mastered').length;
+      const remediated = studentState.logs.filter(l => l.status === 'remediated').length;
+      const score = Math.round(((mastered * 1 + remediated * 0.75) / total) * 100);
+
+      let groupLabel = 'Kelompok Pengayaan';
+      let groupColor = 'text-emerald-700';
+      let recText = 'Luar biasa! Anda menguasai konsep secara utuh dan mampu menyelesaikan analisis tingkat lanjut. Anda direkomendasikan menjadi tutor sebaya dan mengerjakan proyek eksplorasi mandiri.';
+
+      if (score < 60) {
+        groupLabel = 'Kelompok Pendampingan Intensif';
+        groupColor = 'text-rose-700';
+        recText = 'Terdapat beberapa miskonsepsi mendasar yang perlu diluruskan secara bertahap. Guru akan memberikan bimbingan terstruktur menggunakan media visual sebelum melangkah ke materi lanjutan.';
+      } else if (score < 85) {
+        groupLabel = 'Kelompok Penguatan Konsep';
+        groupColor = 'text-amber-700';
+        recText = 'Pemahaman dasar Anda sudah baik dan responsif terhadap Kartu Remediasi Mikro. Lakukan latihan terapan tambahan pada topik yang sempat mengalami miskonsepsi.';
+      }
+
+      document.getElementById('result-student-meta').textContent = `${studentState.name} • ${studentState.className}`;
+      document.getElementById('result-score-big').textContent = `${score}%`;
+      const badgeEl = document.getElementById('result-group-badge');
+      badgeEl.textContent = groupLabel;
+      badgeEl.className = `text-xs font-bold mt-0.5 ${groupColor}`;
+      document.getElementById('result-recommendation').textContent = recText;
+
+      const logList = document.getElementById('result-log-list');
+      logList.innerHTML = studentState.logs.map(l => {
+        const tag = l.status === 'mastered'
+          ? '<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">Paham Utuh</span>'
+          : l.status === 'remediated'
+            ? '<span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">Teremediasi</span>'
+            : '<span class="px-2 py-0.5 rounded bg-rose-100 text-rose-800 font-bold">Perlu Bimbingan</span>';
+        return `<div class="flex items-center justify-between bg-white p-2 rounded-lg border border-slate-200/80">
+          <span class="font-medium text-slate-800 truncate pr-2">${esc(l.code)}: ${esc(l.topic)}</span>
+          ${tag}
+        </div>`;
+      }).join('');
+
+      const firstMisc = studentState.logs.find(l => l.misconception)?.misconception || 'Tidak ada miskonsepsi';
+      const itemStatuses = studentState.logs.map(l => ({
+        code: l.code,
+        topic: l.topic,
+        status: l.status,
+        misconception: l.misconception || null
+      }));
+      classRecords.unshift({
+        name: `${studentState.name} (Baru)`,
+        score,
+        itemStatuses,
+        mainMisconception: firstMisc
+      });
+
+      showToast('Hasil diagnosa siswa otomatis masuk ke Dasbor Analitik Guru!');
+
+      // Kirim ke Firebase (jika tersedia)
+      if (window.simpanKeFirebase) {
+        window.simpanKeFirebase({
+          nama: studentState.name,
+          kelas: studentState.className,
+          paket: (currentPack && currentPack.id) || 'custom',
+          skor: score,
+          miskonsepsi: firstMisc,
+          itemStatuses,
+          waktu: new Date().toISOString()
+        });
+      }
+    }
+
+    function loadSimulatedClassData() {
+      rebuildRecords();
+      renderAnalyticsDashboard();
+      showToast('Data simulasi kelas berhasil diperbarui.');
+    }
+
+    async function loadDataDariFirebase() {
+      showToast('Menarik data dari Firebase...');
+      if (!window.tarikDataFirebase) {
+        showToast('Sistem Firebase belum siap. Periksa koneksi internet.');
+        return;
+      }
+      const dataCloud = await window.tarikDataFirebase();
+      if (dataCloud === null) {
+        showToast('Gagal terhubung ke Firebase. Periksa koneksi atau aturan Firestore.');
+        return;
+      }
+      const pid = (currentPack && currentPack.id) || 'custom';
+      const data = dataCloud
+        .filter(d => !d.paket || d.paket === pid)
+        .sort((a, b) => String(b.waktu || '').localeCompare(String(a.waktu || '')));
+      if (data.length === 0) {
+        showToast('Belum ada data siswa di Firebase untuk paket ini.');
+        return;
+      }
+      classRecords = data.map(d => {
+        const skor = Number(d.skor) || 0;
+        const valid = Array.isArray(d.itemStatuses) && d.itemStatuses.length === currentPack.questions.length;
+        return {
+          name: d.nama || 'Tanpa Nama',
+          score: skor,
+          mainMisconception: d.miskonsepsi || 'Tidak ada miskonsepsi',
+          itemStatuses: valid ? d.itemStatuses : currentPack.questions.map(q => ({
+            code: q.code,
+            topic: q.topic,
+            status: skor >= 80 ? 'mastered' : skor >= 60 ? 'remediated' : 'misconception',
+            misconception: skor >= 80 ? null : (d.miskonsepsi || null)
+          }))
+        };
+      });
+      renderAnalyticsDashboard();
+      showToast(`Berhasil menarik ${data.length} data siswa dari Cloud!`);
+    }
+
+    function renderAnalyticsDashboard() {
+      const totalStudents = classRecords.length;
+      const avgScore = totalStudents ? (classRecords.reduce((acc, r) => acc + r.score, 0) / totalStudents).toFixed(1) : '0.0';
+
+      let totalWrongFirstTry = 0;
+      let totalRemediated = 0;
+      classRecords.forEach(r => {
+        r.itemStatuses.forEach(s => {
+          if (s.status === 'remediated') { totalWrongFirstTry++; totalRemediated++; }
+          if (s.status === 'misconception') { totalWrongFirstTry++; }
+        });
+      });
+      const remRate = totalWrongFirstTry > 0 ? Math.round((totalRemediated / totalWrongFirstTry) * 100) : 100;
+
+      const pengayaan = classRecords.filter(r => r.score >= 85);
+      const penguatan = classRecords.filter(r => r.score >= 60 && r.score < 85);
+      const intensif = classRecords.filter(r => r.score < 60);
+
+      document.getElementById('stat-total-students').textContent = totalStudents;
+      document.getElementById('stat-avg-mastery').textContent = `${avgScore.replace('.', ',')}%`;
+      document.getElementById('stat-remediated-rate').textContent = `${remRate}%`;
+      document.getElementById('stat-intensive-count').textContent = `${intensif.length} Siswa`;
+
+      const compContainer = document.getElementById('competency-bars-container');
+      compContainer.innerHTML = currentPack.questions.map((q, idx) => {
+        const okCount = classRecords.filter(r => {
+          const st = r.itemStatuses[idx]?.status;
+          return st === 'mastered' || st === 'remediated';
+        }).length;
+        const pct = totalStudents ? Math.round((okCount / totalStudents) * 100) : 0;
+        const barColor = pct >= 80 ? 'bg-emerald-500' : pct >= 65 ? 'bg-indigo-600' : 'bg-rose-500';
+        return `
+          <div class="space-y-1">
+            <div class="flex justify-between text-xs">
+              <span class="font-semibold text-slate-800">${esc(q.code)} &mdash; ${esc(q.topic)}</span>
+              <span class="font-bold text-slate-700">${pct}%</span>
+            </div>
+            <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+              <div class="h-full ${barColor} rounded-full transition-all duration-500" style="width: ${pct}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const miscMap = {};
+      classRecords.forEach(r => {
+        r.itemStatuses.forEach(s => {
+          if (s.misconception) {
+            miscMap[s.misconception] = (miscMap[s.misconception] || 0) + 1;
+          }
+        });
+      });
+      const sortedMisc = Object.entries(miscMap).sort((a, b) => b[1] - a[1]).slice(0, 4);
+      const miscContainer = document.getElementById('top-misconceptions-list');
+      miscContainer.innerHTML = sortedMisc.length ? sortedMisc.map(([text, count]) => `
+        <div class="p-3 rounded-xl bg-rose-50/70 border border-rose-200/80 flex items-start justify-between gap-3">
+          <div class="text-xs text-rose-950 leading-relaxed font-medium">${esc(text)}</div>
+          <span class="px-2.5 py-1 rounded-lg bg-rose-600 text-white text-[11px] font-bold shrink-0">${count} Siswa</span>
+        </div>
+      `).join('') : '<div class="text-xs text-slate-500">Belum ada pola miskonsepsi tercatat.</div>';
+
+      const groupsContainer = document.getElementById('differentiation-groups');
+      const groupsData = [
+        {
+          title: 'Kelompok A: Pengayaan (Mahir)',
+          desc: 'Skor ≥ 85%. Siap menjadi tutor sebaya & mengerjakan studi kasus lanjutan.',
+          badge: `${pengayaan.length} Siswa`,
+          border: 'border-emerald-200 bg-emerald-50/40',
+          badgeStyle: 'bg-emerald-600 text-white',
+          students: pengayaan.slice(0, 6).map(s => esc(s.name)).join(', ') + (pengayaan.length > 6 ? `, +${pengayaan.length - 6} lainnya` : '')
+        },
+        {
+          title: 'Kelompok B: Penguatan Konsep',
+          desc: 'Skor 60%–84%. Memahami konsep setelah remediasi mikro, perlu latihan terapan.',
+          badge: `${penguatan.length} Siswa`,
+          border: 'border-amber-200 bg-amber-50/40',
+          badgeStyle: 'bg-amber-500 text-white',
+          students: penguatan.slice(0, 6).map(s => esc(s.name)).join(', ') + (penguatan.length > 6 ? `, +${penguatan.length - 6} lainnya` : '')
+        },
+        {
+          title: 'Kelompok C: Pendampingan Intensif',
+          desc: 'Skor < 60%. Prioritas bimbingan langsung guru menggunakan alat peraga visual.',
+          badge: `${intensif.length} Siswa`,
+          border: 'border-rose-200 bg-rose-50/40',
+          badgeStyle: 'bg-rose-600 text-white',
+          students: intensif.length ? intensif.map(s => esc(s.name)).join(', ') : 'Tidak ada siswa di kategori ini'
+        }
+      ];
+
+      groupsContainer.innerHTML = groupsData.map(g => `
+        <div class="rounded-xl border ${g.border} p-4 space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <h4 class="text-xs font-extrabold text-slate-900">${g.title}</h4>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-bold ${g.badgeStyle}">${g.badge}</span>
+          </div>
+          <p class="text-[11px] text-slate-600 leading-relaxed">${g.desc}</p>
+          <div class="pt-1 text-xs font-medium text-slate-800 border-t border-slate-200/60">${g.students || '-'}</div>
+        </div>
+      `).join('');
+
+      const tbody = document.getElementById('heatmap-table-body');
+      tbody.innerHTML = classRecords.map(r => {
+        const cells = r.itemStatuses.map(s => {
+          const color = s.status === 'mastered' ? 'bg-emerald-500' : s.status === 'remediated' ? 'bg-amber-400' : 'bg-rose-500';
+          return `<span title="${s.code}: ${s.status}" class="w-4 h-4 rounded-sm ${color} inline-block"></span>`;
+        }).join(' ');
+
+        const grp = r.score >= 85
+          ? '<span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-semibold">Pengayaan</span>'
+          : r.score >= 60
+            ? '<span class="px-2 py-0.5 rounded bg-amber-50 text-amber-700 font-semibold">Penguatan</span>'
+            : '<span class="px-2 py-0.5 rounded bg-rose-50 text-rose-700 font-semibold">Pendampingan</span>';
+
+        return `
+          <tr class="hover:bg-slate-50/80">
+            <td class="py-2.5 px-3 font-semibold text-slate-800 whitespace-nowrap">${esc(r.name)}</td>
+            <td class="py-2.5 px-2 text-center font-bold text-indigo-900">${r.score}%</td>
+            <td class="py-2.5 px-2 text-center whitespace-nowrap"><div class="inline-flex gap-1">${cells}</div></td>
+            <td class="py-2.5 px-3 text-slate-600 max-w-xs truncate">${esc(r.mainMisconception)}</td>
+            <td class="py-2.5 px-3 whitespace-nowrap">${grp}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderAuthoringList() {
+      document.getElementById('authoring-count').textContent = currentPack.questions.length;
+      const listEl = document.getElementById('authoring-question-list');
+      listEl.innerHTML = currentPack.questions.map((q, i) => `
+        <div class="p-3 rounded-xl border border-slate-200 bg-slate-50/70 flex items-start justify-between gap-2">
+          <div class="space-y-0.5">
+            <div class="flex items-center gap-1.5">
+              <span class="px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-800 text-[10px] font-bold">${q.code}</span>
+              <span class="text-[11px] font-bold text-slate-700">${esc(q.topic)}</span>
+              <span class="text-[10px] text-slate-500">(Level ${q.level})</span>
+            </div>
+            <p class="text-xs text-slate-600 line-clamp-2">${esc(q.text)}</p>
+          </div>
+          ${currentPack.questions.length > 1 ? `
+            <button onclick="removeQuestion(${i})" title="Hapus Butir" class="text-rose-500 hover:text-rose-700 text-xs font-bold px-2 py-1 cursor-pointer">&times;</button>
+          ` : ''}
+        </div>
+      `).join('');
+    }
+
+    function addCustomQuestion() {
+      const topic = document.getElementById('new-q-topic').value.trim();
+      const level = parseInt(document.getElementById('new-q-level').value, 10) || 1;
+      const text = document.getElementById('new-q-text').value.trim();
+      const optCorrect = document.getElementById('new-opt-correct').value.trim();
+      const optWrong1 = document.getElementById('new-opt-wrong1').value.trim();
+      const miscWrong1 = document.getElementById('new-misc-wrong1').value.trim();
+      const optWrong2 = document.getElementById('new-opt-wrong2').value.trim();
+      const miscWrong2 = document.getElementById('new-misc-wrong2').value.trim();
+      const remediation = document.getElementById('new-q-remediation').value.trim();
+
+      if (!topic || !text || !optCorrect || !optWrong1 || !remediation) {
+        showToast('Mohon lengkapi Topik, Pertanyaan, Opsi Benar, minimal 1 Pengecoh, dan Kartu Remediasi.');
+        return;
+      }
+
+      const newCode = `K-0${currentPack.questions.length + 1}`;
+      const options = [
+        { text: optCorrect, isCorrect: true },
+        { text: optWrong1, isCorrect: false, misconception: miscWrong1 || 'Miskonsepsi pada konsep dasar topik ini.' }
+      ];
+      if (optWrong2) {
+        options.push({ text: optWrong2, isCorrect: false, misconception: miscWrong2 || 'Kekeliruan analisis penerapan konsep.' });
+      }
+
+      currentPack.questions.push({
+        id: `CUSTOM_${Date.now()}`,
+        code: newCode,
+        topic,
+        level,
+        diagram: 'ip_mac',
+        text,
+        options,
+        remediation
+      });
+
+      ['new-q-topic', 'new-q-text', 'new-opt-correct', 'new-opt-wrong1', 'new-misc-wrong1', 'new-opt-wrong2', 'new-misc-wrong2', 'new-q-remediation'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+
+      rebuildRecords();
+      updateHeaderPackInfo();
+      renderAuthoringList();
+      showToast(`Butir ${newCode} (${topic}) berhasil ditambahkan ke paket diagnostik!`);
+    }
+
+    function removeQuestion(index) {
+      currentPack.questions.splice(index, 1);
+      rebuildRecords();
+      updateHeaderPackInfo();
+      renderAuthoringList();
+      showToast('Butir soal dihapus dari paket aktif.');
+    }
+
+    function applyAuthoringToStudentMode() {
+      resetStudentSession();
+      switchMode('siswa');
+      showToast('Paket soal siap diujikan pada Mode Siswa.');
+    }
+
+    function exportCurrentPackJSON() {
+      const jsonStr = JSON.stringify(currentPack, null, 2);
+      const tempArea = document.createElement('textarea');
+      tempArea.value = jsonStr;
+      document.body.appendChild(tempArea);
+      tempArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempArea);
+      showToast('Kode JSON paket soal diagnostik berhasil disalin ke clipboard!');
+    }
+
+    function importPackJSON() {
+      const raw = document.getElementById('import-json-input').value.trim();
+      if (!raw) {
+        showToast('Tempel kode JSON paket soal terlebih dahulu.');
+        return;
+      }
+      try {
+        const parsed = JSON.parse(raw);
+        if (!parsed.title || !Array.isArray(parsed.questions) || parsed.questions.length === 0) {
+          throw new Error('Struktur JSON tidak valid');
+        }
+        currentPack = parsed;
+        rebuildRecords();
+        updateHeaderPackInfo();
+        renderAuthoringList();
+        showToast(`Paket "${currentPack.title}" berhasil dimuat dari JSON!`);
+      } catch (e) {
+        showToast('Format JSON tidak valid. Pastikan struktur title dan questions sesuai.');
+      }
+    }
+
+    const store = {
+      get(k){ try{ const v=localStorage.getItem('diag:'+k); return v?JSON.parse(v):null; }catch(e){ return null; } },
+      set(k,v){ try{ localStorage.setItem('diag:'+k,JSON.stringify(v)); return true; }catch(e){ return false; } },
+      del(k){ try{ localStorage.removeItem('diag:'+k); }catch(e){} }
+    };
+    const packId = () => (currentPack && currentPack.id) || 'custom';
+    function rebuildRecords(){
+      const real = store.get('rec:'+packId()) || [];
+      const sim = real.length === 0 || store.get('sim') === true;
+      classRecords = sim ? real.concat(generateSimulatedRecords(currentPack)) : real;
+    }
+    function countSaved(){
+      let n=0; try{ for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(k&&k.indexOf('diag:rec:')===0) n+=(JSON.parse(localStorage.getItem(k))||[]).length; } }catch(e){}
+      return n;
+    }
+    function conceptCard(q){
+      const t=(q.topic||'').slice(0,42).replace(/&/g,'&amp;');
+      return `<svg viewBox="0 0 360 150" class="w-full h-auto max-h-40"><rect x="20" y="20" width="320" height="110" rx="14" fill="#f1f6fd" stroke="#a9c6f0" stroke-width="1.5"/><text x="180" y="60" text-anchor="middle" font-size="11" font-weight="700" fill="#4a86dc">${q.code||''}</text><text x="180" y="88" text-anchor="middle" font-size="15" font-weight="800" fill="#0b3d91">${t}</text><g fill="#c2cad8"><circle cx="165" cy="108" r="4"/><circle cx="180" cy="108" r="4"/><circle cx="195" cy="108" r="4"/></g><circle cx="${165+15*((q.level||1)-1)}" cy="108" r="4" fill="#0b3d91"/></svg>`;
+    }
+
+    const Q=(id,code,topic,level,text,ok,w1,w2,rem)=>({id,code,topic,level,text,options:[{text:ok,isCorrect:true},{text:w1[0],isCorrect:false,misconception:w1[1]},{text:w2[0],isCorrect:false,misconception:w2[1]}],remediation:rem});
+    
+    PRESET_PACKAGES.akt={id:'akt',title:'Akuntansi Dasar & Keuangan (SMK Akuntansi / Bisnis)',subject:'Akuntansi Keuangan',questions:[
+      Q('Q1','AKT-01','Persamaan Akuntansi',1,'Perusahaan membeli perlengkapan kantor Rp2.000.000 secara tunai. Bagaimana pengaruhnya terhadap persamaan akuntansi?','Perlengkapan bertambah dan Kas berkurang dengan jumlah sama, sehingga total aset tidak berubah.',['Aset bertambah Rp2.000.000 dan modal ikut bertambah.','Menganggap setiap pembelian menambah modal, padahal hanya terjadi pertukaran antar-aset.'],['Beban bertambah karena perlengkapan langsung dipakai habis.','Mencampur pembelian aset dengan pengakuan beban pemakaian.'],'Pembelian tunai hanya menukar bentuk harta: kas keluar, perlengkapan masuk. Total aset dan modal tidak berubah.'),
+      Q('Q2','AKT-02','Debit dan Kredit',1,'Akun Kas bertambah. Pencatatan yang benar adalah...','Dicatat di sisi debit, karena saldo normal akun aset ada di debit.',['Dicatat di sisi kredit karena uang masuk ke perusahaan.','Mengartikan debit sebagai "berkurang" dan kredit "bertambah" seperti istilah rekening bank.'],['Bebas di debit atau kredit, asal total jurnal seimbang.','Menganggap akun tidak punya saldo normal.'],'Debit dan kredit hanyalah sisi kiri dan kanan. Aset bertambah di debit; kewajiban dan modal bertambah di kredit.'),
+      Q('Q3','AKT-03','Basis Akrual',2,'Bengkel menyelesaikan jasa servis pada Desember, pelanggan membayar pada Januari. Kapan pendapatan diakui menurut basis akrual?','Desember, saat jasa selesai diberikan.',['Januari, saat kas diterima.','Menyamakan basis akrual dengan basis kas.'],['Saat faktur dicetak, kapan pun waktunya.','Mengaitkan pengakuan pendapatan dengan dokumen, bukan terjadinya transaksi.'],'Akrual mengakui pendapatan saat hak atas pembayaran timbul (jasa selesai), bukan saat uang diterima.'),
+      Q('Q4','AKT-04','Penyusutan Garis Lurus',2,'Mesin dibeli Rp50.000.000, umur ekonomis 5 tahun, nilai sisa Rp10.000.000. Beban penyusutan per tahun?','Rp8.000.000, yaitu (50.000.000 - 10.000.000) / 5.',['Rp10.000.000','Mengabaikan nilai sisa dalam rumus penyusutan.'],['Rp12.000.000','Menambahkan nilai sisa, bukan mengurangkannya.'],'Penyusutan = (harga perolehan - nilai sisa) / umur ekonomis. Nilai sisa tidak ikut disusutkan.'),
+      Q('Q5','AKT-05','Menelusuri Neraca Saldo',3,'Neraca saldo menunjukkan selisih Rp900.000. Dugaan paling logis?','Ada transaksi Rp450.000 yang dicatat di sisi berlawanan, sebab selisih = 2 x nilai transaksi.',['Ada transaksi Rp900.000 yang lupa dicatat sama sekali.','Mengira jurnal yang terlewat selalu menyebabkan selisih, padahal kedua sisinya sama-sama hilang.'],['Dibiarkan saja sampai laporan akhir.','Menganggap ketidakseimbangan neraca saldo wajar.'],'Salah sisi menggeser selisih dua kali lipat. Bagi selisih dengan 2 lalu cari transaksi senilai itu.')]};
+    PRESET_PACKAGES.rpl={id:'rpl',title:'Pemrograman Dasar & Basis Data (SMK RPL)',subject:'Rekayasa Perangkat Lunak',questions:[
+      Q('Q1','RPL-01','Tipe Data String',1,'Pada Python, hasil dari "5" + "3" adalah...','"53", karena kedua nilai berupa string dan digabungkan.',['8, karena otomatis dijumlahkan.','Mengabaikan tipe data: tanda kutip menjadikan angka sebagai teks.'],['Error karena angka tidak boleh dijumlahkan.','Mengira operator + hanya berlaku untuk angka.'],'Tanda kutip membuat nilai bertipe string. Operator + pada string berarti penggabungan (concatenation).'),
+      Q('Q2','RPL-02','Primary Key',1,'Fungsi utama PRIMARY KEY pada sebuah tabel adalah...','Mengidentifikasi setiap baris secara unik dan tidak boleh NULL.',['Mengurutkan data dari kecil ke besar.','Menyamakan kunci dengan pengurutan data.'],['Menyembunyikan kolom dari pengguna lain.','Mengaitkan kunci dengan hak akses.'],'Primary key adalah pengenal unik tiap baris, seperti NIS pada tabel siswa. Urutan dan akses diatur dengan fitur lain.'),
+      Q('Q3','RPL-03','Kondisi SQL AND',2,"Query: SELECT * FROM siswa WHERE nilai > 75 AND kelas = 'XI RPL'. Baris yang tampil adalah...",'Siswa dengan nilai di atas 75 DAN berada di kelas XI RPL.',['Siswa dengan nilai di atas 75 ATAU di kelas XI RPL.','Memaknai AND sebagai gabungan (union) kondisi.'],['Semua siswa XI RPL; nilai hanya untuk pengurutan.','Mengira kondisi kedua membatalkan kondisi pertama.'],'AND menuntut kedua kondisi terpenuhi sekaligus; OR cukup salah satunya.'),
+      Q('Q4','RPL-04','Indeks Array',2,'daftar = [10, 20, 30, 40]; print(daftar[3]) menampilkan...','40, karena indeks dimulai dari 0.',['30','Mengira indeks dimulai dari 1.'],['Error karena indeks 3 melebihi panjang daftar.','Mengira indeks terakhir sama dengan jumlah elemen (4).'],'Indeks dimulai dari 0: 0 ke 10, 1 ke 20, 2 ke 30, 3 ke 40. Indeks terakhir = panjang - 1.'),
+      Q('Q5','RPL-05','Kesalahan Batas Perulangan',3,'for i in range(1, n) dimaksudkan menjumlahkan 1 sampai n, tetapi hasilnya selalu kurang. Penyebabnya?','range berhenti sebelum n sehingga n tidak ikut; gunakan range(1, n + 1).',['Variabel penampung belum bertipe integer.','Menyalahkan tipe variabel pada bahasa yang bertipe dinamis.'],['Perulangan for tidak bisa dipakai untuk penjumlahan.','Menganggap for hanya untuk mencetak, bukan akumulasi.'],'Batas atas range bersifat eksklusif. Lacak nilai i langkah demi langkah untuk memastikan.')]};
+    PRESET_PACKAGES.titl={id:'titl',title:'Dasar Listrik & Elektronika (SMK TITL / Teknik Elektro)',subject:'Teknik Ketenagalistrikan',questions:[
+      Q('Q1','LIS-01','Hukum Ohm',1,'Resistor 20 ohm dialiri arus 0,5 A. Tegangan di ujung resistor?','10 V, karena V = I x R.',['40 V','Membagi, bukan mengalikan (memakai V = R / I).'],['0,025 V','Membalik rumus menjadi V = I / R.'],'Hukum Ohm: V = I x R. Segitiga V-I-R membantu mengingat letak tiap besaran.'),
+      Q('Q2','LIS-02','Rangkaian Paralel',1,'Dua lampu identik dipasang paralel pada baterai. Jika satu lampu putus, lampu lainnya...','Tetap menyala karena memiliki jalur arus sendiri.',['Ikut padam karena arus terputus.','Menerapkan sifat rangkaian seri pada rangkaian paralel.'],['Menyala lebih redup karena arus terbagi.','Mengira cabang yang tersisa kehilangan tegangan.'],'Pada paralel, tiap cabang mendapat tegangan sumber yang sama dan bekerja mandiri.'),
+      Q('Q3','LIS-03','Energi Listrik',2,'Setrika 400 W menyala 2 jam. Energi yang terpakai?','0,8 kWh (0,4 kW x 2 jam).',['400 kWh','Mengabaikan konversi watt ke kilowatt.'],['200 Wh','Membagi daya dengan waktu, bukan mengalikan.'],'Energi = daya x waktu. Ubah watt ke kilowatt (bagi 1000) sebelum dikali jam.'),
+      Q('Q4','LIS-04','Hambatan Seri',2,'Resistor 10, 20, dan 30 ohm disusun seri. Hambatan totalnya?','60 ohm, hasil penjumlahan ketiganya.',['Sekitar 5,45 ohm','Memakai rumus paralel pada rangkaian seri.'],['20 ohm','Mengira hambatan total adalah rata-rata.'],'Seri: R total = R1 + R2 + R3. Rumus kebalikan hanya untuk paralel.'),
+      Q('Q5','LIS-05','Pembagi Tegangan',3,'Resistor 100 ohm dan 300 ohm seri pada sumber 12 V. Tegangan pada resistor 300 ohm?','9 V, sebab I = 12/400 = 0,03 A dan V = 0,03 x 300.',['6 V','Mengira tegangan terbagi rata tanpa melihat nilai hambatan.'],['3 V','Menukar proporsi: tegangan terbesar dianggap di hambatan terkecil.'],'Pada rangkaian seri, tegangan terbagi sebanding dengan hambatan: 300/400 x 12 V = 9 V.')]};
+    PRESET_PACKAGES.matsmk={id:'matsmk',title:'Matematika Terapan SMK (Persentase, Perbandingan & Statistik)',subject:'Matematika Umum SMK',questions:[
+      Q('Q1','MTS-01','Persentase & Diskon',1,'Harga barang Rp200.000 diskon 25%. Berapa harga yang dibayar?','Rp150.000 (200.000 - 50.000).',['Rp175.000','Menganggap 25% sebagai potongan Rp25.000, mengabaikan basis harga.'],['Rp50.000','Menjawab besar potongan, bukan harga setelah diskon.'],'Potongan = 25% x 200.000 = 50.000. Harga bayar = harga awal - potongan.'),
+      Q('Q2','MTS-02','Perbandingan Senilai',1,'Mesin menghasilkan 120 unit dalam 3 jam. Dalam 5 jam jumlahnya?','200 unit (40 unit per jam x 5).',['72 unit','Memakai perbandingan berbalik nilai pada situasi senilai.'],['122 unit','Menambahkan selisih waktu langsung ke jumlah unit.'],'Semakin lama waktu, semakin banyak hasil: senilai. Cari dulu hasil per satu jam.'),
+      Q('Q3','MTS-03','Bunga Tunggal',2,'Pinjaman Rp10.000.000 berbunga tunggal 12% per tahun selama 6 bulan. Total bunganya?','Rp600.000 (10.000.000 x 12% x 6/12).',['Rp1.200.000','Mengabaikan lamanya waktu pinjaman.'],['Rp7.200.000','Memakai angka 6 sebagai tahun, bukan bulan.'],'Bunga = pokok x suku bunga x waktu (dalam tahun). 6 bulan = 0,5 tahun.'),
+      Q('Q4','MTS-04','Mean dan Median',2,'Data: 4, 6, 6, 8, 16. Pernyataan yang benar?','Median 6 dan rata-rata 8.',['Median 8 karena median sama dengan rata-rata.','Menyamakan median dengan rata-rata.'],['Rata-rata 6 karena 6 paling sering muncul.','Menyamakan rata-rata dengan modus.'],'Median = nilai tengah data berurutan; rata-rata = jumlah / banyak data (40/5 = 8); modus = yang paling sering.'),
+      Q('Q5','MTS-05','Skala dan Luas',3,'Sisi sebuah persegi diperbesar 2 kali. Luasnya menjadi berapa kali semula?','4 kali, karena luas bergantung pada kuadrat sisi.',['2 kali','Mengira luas berubah linear dengan panjang sisi.'],['8 kali','Mencampur rumus luas dan volume.'],'Luas = s x s. Jika s menjadi 2s, luas menjadi (2s) x (2s) = 4 x s x s.')]};
+
+    const P=(id,title,subject,qs)=>{PRESET_PACKAGES[id]={id,title,subject,questions:qs};};
+    P('bio','Biologi (SMP/MTs)','Biologi',[
+      Q('Q1','BIO-01','Bahan Fotosintesis',1,'Tumbuhan hijau membuat makanan melalui fotosintesis. Bahan yang diperlukan adalah...','Air, karbon dioksida, dan cahaya matahari.',['Oksigen dan tanah.','Menganggap tanah sebagai sumber makanan tumbuhan.'],['Gula dan air dari akar.','Tertukar antara bahan baku dan hasil fotosintesis.'],'Bahan baku: air + CO2 + cahaya. Hasilnya: glukosa dan oksigen. Tanah hanya menyediakan air dan mineral.'),
+      Q('Q2','BIO-02','Rantai Makanan',2,'Rantai makanan: padi, tikus, ular, elang. Jika ular berkurang drastis, yang paling mungkin terjadi adalah...','Populasi tikus meningkat dan padi berkurang.',['Padi meningkat karena ular tidak memakannya.','Keliru membaca arah aliran energi; ular tidak memakan padi.'],['Elang berubah menjadi produsen.','Tidak memahami peran tingkat trofik yang tetap.'],'Hilangnya pemangsa membuat mangsanya bertambah, lalu mangsa itu menekan populasi tingkat di bawahnya.'),
+      Q('Q3','BIO-03','Pertukaran Gas',2,'Pertukaran oksigen dan karbon dioksida di paru-paru terjadi pada...','Alveolus.',['Trakea.','Mengira saluran napas besar tempat pertukaran gas.'],['Diafragma.','Menyamakan otot pernapasan dengan organ pertukaran gas.'],'Alveolus berdinding sangat tipis dan dikelilingi kapiler darah, sehingga gas dapat berdifusi.'),
+      Q('Q4','BIO-04','Pewarisan Sifat',3,'Bunga merah (Mm) disilangkan dengan sesama bunga merah (Mm); M dominan, m resesif putih. Peluang keturunan berbunga putih?','25 persen (genotipe mm).',['50 persen.','Mengira heterozigot menghasilkan sifat setengah-setengah.'],['0 persen.','Mengira sifat resesif tidak muncul jika kedua induk berbunga merah.'],'Mm x Mm menghasilkan MM, Mm, Mm, mm. Hanya satu dari empat (mm) yang berbunga putih.')]);
+    P('bindo','Bahasa Indonesia (SMP/MTs)','Bahasa Indonesia',[
+      Q('Q1','BIN-01','Ide Pokok',1,'Ide pokok sebuah paragraf umumnya terdapat pada...','Kalimat utama yang memuat gagasan umum paragraf.',['Kalimat yang paling panjang.','Menilai ide pokok dari panjang kalimat.'],['Kalimat terakhir, selalu.','Mengira letak ide pokok tidak pernah berubah.'],'Ide pokok bisa di awal, akhir, atau keduanya. Kenali dari gagasan yang dijelaskan oleh kalimat lain.'),
+      Q('Q2','BIN-02','Kata Baku',1,'Penulisan kata baku yang benar adalah...','Aktivitas.',['Aktifitas.','Terbawa lafal lisan; serapan dari activity ditulis dengan v.'],['Aktipitas.','Menulis menurut bunyi tanpa merujuk KBBI.'],'Rujuk KBBI. Kata serapan dari activity ditulis aktivitas, bukan aktifitas.'),
+      Q('Q3','BIN-03','Teks Eksposisi',2,'Ciri utama teks eksposisi adalah...','Menyampaikan informasi atau pendapat yang didukung fakta dan argumen.',['Menceritakan peristiwa dengan tokoh dan alur.','Tertukar dengan teks naratif.'],['Menyajikan langkah-langkah yang berurutan.','Tertukar dengan teks prosedur.'],'Eksposisi: tesis, argumen, dan penegasan ulang. Narasi bercerita, prosedur memberi langkah.'),
+      Q('Q4','BIN-04','Majas',3,'Kalimat "Mendengar kabar itu, hatiku hancur berkeping-keping" mengandung majas...','Hiperbola, karena melebih-lebihkan keadaan.',['Personifikasi.','Menganggap hati diberi sifat manusia, padahal yang terjadi pelebihan.'],['Metafora.','Metafora membandingkan langsung dua hal, bukan melebihkan.'],'Hiperbola mengungkapkan sesuatu secara berlebihan. Personifikasi memberi sifat manusia pada benda.')]);
+    P('sej','Sejarah Indonesia (SMP/MTs)','Sejarah',[
+      Q('Q1','SEJ-01','Proklamasi',1,'Proklamasi kemerdekaan Indonesia dibacakan pada...','17 Agustus 1945 di Jakarta.',['1 Juni 1945.','Tertukar dengan pidato Soekarno tentang lahirnya Pancasila.'],['28 Oktober 1928.','Tertukar dengan Sumpah Pemuda.'],'Proklamasi dibacakan Soekarno-Hatta pada 17 Agustus 1945. Tanggal lain menandai peristiwa berbeda.'),
+      Q('Q2','SEJ-02','Rengasdengklok',2,'Peristiwa Rengasdengklok terjadi karena...','Golongan muda mendesak Soekarno-Hatta segera memproklamasikan kemerdekaan.',['Soekarno-Hatta diculik tentara Jepang.','Keliru menentukan pelaku; dilakukan golongan muda.'],['Pemberontakan melawan Belanda.','Mengaitkan dengan konflik masa berikutnya.'],'Golongan muda membawa Soekarno-Hatta agar terbebas dari pengaruh Jepang dan segera memproklamasikan kemerdekaan.'),
+      Q('Q3','SEJ-03','Sumpah Pemuda',2,'Tiga ikrar Sumpah Pemuda 1928 adalah...','Satu tanah air, satu bangsa, dan menjunjung bahasa persatuan, Indonesia.',['Satu negara, satu agama, satu adat.','Memasukkan agama dan adat yang tidak ada dalam ikrar.'],['Merdeka, berdaulat, dan bersatu.','Mencampur dengan semboyan masa kemerdekaan.'],'Ikrar: bertumpah darah satu, berbangsa satu, dan menjunjung bahasa persatuan, bahasa Indonesia.'),
+      Q('Q4','SEJ-04','Tanam Paksa',3,'Tujuan nyata Tanam Paksa (Cultuurstelsel) yang diterapkan Belanda adalah...','Memperoleh keuntungan besar dengan mewajibkan rakyat menanam tanaman ekspor.',['Meningkatkan kesejahteraan petani pribumi.','Menerima alasan resmi sebagai tujuan sebenarnya.'],['Memperkenalkan pendidikan modern.','Tertukar dengan Politik Etis.'],'Tanam Paksa menguntungkan kas Belanda dan menyengsarakan rakyat. Politik Etis muncul kemudian dengan irigasi, edukasi, dan emigrasi.')]);
+    P('pancasila','Pendidikan Pancasila (SD/MI)','Pendidikan Pancasila',[
+      Q('Q1','PAN-01','Bunyi Sila',1,'Sila pertama Pancasila berbunyi...','Ketuhanan Yang Maha Esa.',['Kemanusiaan yang adil dan beradab.','Tertukar urutan; itu sila kedua.'],['Persatuan Indonesia.','Tertukar urutan; itu sila ketiga.'],'Urutan: 1 Ketuhanan, 2 Kemanusiaan, 3 Persatuan, 4 Kerakyatan, 5 Keadilan sosial.'),
+      Q('Q2','PAN-02','Lambang Sila',1,'Lambang sila ketiga pada Garuda Pancasila adalah...','Pohon beringin.',['Bintang.','Bintang adalah lambang sila pertama.'],['Padi dan kapas.','Padi dan kapas adalah lambang sila kelima.'],'Bintang (1), rantai (2), beringin (3), kepala banteng (4), padi dan kapas (5).'),
+      Q('Q3','PAN-03','Toleransi',2,'Menghargai teman yang sedang beribadah dengan cara berbeda adalah pengamalan sila...','Pertama, Ketuhanan Yang Maha Esa.',['Ketiga, Persatuan Indonesia.','Mengira toleransi hanya soal persatuan, bukan kebebasan beribadah.'],['Kelima, Keadilan Sosial.','Mengaitkan toleransi dengan pembagian keadilan.'],'Saling menghormati kebebasan beribadah adalah pengamalan sila pertama.'),
+      Q('Q4','PAN-04','Gotong Royong',3,'Warga bergotong royong membersihkan selokan, tetapi Budi memilih bermain. Sikap yang paling sesuai Pancasila adalah...','Mengajak Budi ikut serta dengan santun karena kerja sama demi kepentingan bersama.',['Membiarkan Budi karena itu pilihan pribadinya.','Menganggap kepentingan bersama boleh diabaikan.'],['Memarahi Budi agar jera.','Memakai cara kasar yang bertentangan dengan sila kemanusiaan.'],'Gotong royong dijalankan dengan mengajak, bukan memaksa. Itu sejalan dengan persatuan dan kemanusiaan.')]);
+    P('bindsd','Bahasa Indonesia (SD/MI)','Bahasa Indonesia',[
+      Q('Q1','BSD-01','Tanda Baca',1,'Tanda baca di akhir kalimat tanya adalah...','Tanda tanya (?).',['Tanda seru (!).','Mengira tanda seru dipakai untuk semua kalimat yang butuh jawaban.'],['Tanda titik (.).','Mengira kalimat tanya diakhiri titik seperti kalimat berita.'],'Kalimat tanya diakhiri tanda tanya, kalimat perintah atau seruan tanda seru, kalimat berita titik.'),
+      Q('Q2','BSD-02','Antonim',1,'Lawan kata (antonim) dari "rajin" adalah...','Malas.',['Tekun.','Tertukar antonim dengan sinonim.'],['Pintar.','Mengira sifat baik lain sebagai lawan kata.'],'Antonim berarti berlawanan makna; sinonim berarti sama atau mirip.'),
+      Q('Q3','BSD-03','Subjek Kalimat',2,'Pada kalimat "Budi membaca buku di perpustakaan", subjeknya adalah...','Budi.',['membaca.','Tertukar subjek dengan predikat.'],['buku.','Tertukar subjek dengan objek.'],'Subjek menjawab "siapa yang melakukan"; predikat adalah kegiatannya; objek adalah yang dikenai kegiatan.'),
+      Q('Q4','BSD-04','Urutan Peristiwa',3,'(1) Ibu memasak nasi. (2) Ibu mencuci beras. (3) Ibu menyajikan nasi. Urutan yang benar adalah...','2 - 1 - 3.',['1 - 2 - 3.','Mengurutkan menurut nomor, bukan logika peristiwa.'],['3 - 2 - 1.','Membalik urutan kejadian.'],'Cuci beras dahulu, lalu dimasak, baru disajikan. Tanyakan "apa yang terjadi lebih dulu?".')]);
+    P('matsd','Matematika (SD/MI)','Matematika',[
+      Q('Q1','MSD-01','Penjumlahan Bersusun',1,'345 + 278 = ...','623.',['513.','Lupa angka simpanan pada satuan dan puluhan.'],['613.','Lupa satu angka simpanan.'],'Satuan 5+8=13 (tulis 3, simpan 1); puluhan 4+7+1=12 (tulis 2, simpan 1); ratusan 3+2+1=6.'),
+      Q('Q2','MSD-02','Pecahan Senilai',1,'Pecahan yang senilai dengan 1/2 adalah...','2/4.',['2/3.','Menambah pembilang dan penyebut dengan angka yang sama.'],['1/4.','Mengira penyebut lebih besar berarti nilainya sama.'],'Pecahan senilai didapat dengan mengalikan pembilang dan penyebut dengan bilangan yang sama: 1x2 / 2x2 = 2/4.'),
+      Q('Q3','MSD-03','Keliling Persegi Panjang',2,'Persegi panjang berukuran panjang 8 cm dan lebar 5 cm. Kelilingnya...','26 cm.',['40 cm.','Menghitung luas, bukan keliling.'],['13 cm.','Menjumlahkan panjang dan lebar tanpa dikali 2.'],'Keliling = 2 x (p + l) = 2 x 13 = 26 cm. Luas = p x l = 40 cm persegi.'),
+      Q('Q4','MSD-04','Soal Cerita',3,'Ani punya 3 kantong berisi 12 kelereng. Semua kelereng dibagi rata kepada 4 teman. Tiap teman mendapat...','9 kelereng.',['48 kelereng.','Memakai penjumlahan, bukan pembagian.'],['3 kelereng.','Hanya membagi 12 dengan 4 dan mengabaikan jumlah kantong.'],'Total = 3 x 12 = 36 kelereng. Dibagi 4 teman: 36 / 4 = 9.')]);
+    P('ipas','IPAS (SD/MI)','Ilmu Pengetahuan Alam dan Sosial',[
+      Q('Q1','IPS-01','Bagian Tumbuhan',1,'Bagian tumbuhan yang menyerap air dari dalam tanah adalah...','Akar.',['Daun.','Daun tempat fotosintesis, bukan penyerap air tanah.'],['Batang.','Batang mengangkut air, bukan menyerapnya.'],'Akar menyerap air dan mineral, batang mengangkutnya, daun membuat makanan.'),
+      Q('Q2','IPS-02','Sumber Energi',1,'Sumber energi utama bagi kehidupan di bumi adalah...','Matahari.',['Bulan.','Mengira bulan memancarkan cahaya sendiri.'],['Api.','Menyamakan sumber energi buatan dengan sumber utama alam.'],'Matahari memberi cahaya dan panas. Bulan hanya memantulkan cahaya matahari.'),
+      Q('Q3','IPS-03','Perubahan Wujud',2,'Perubahan wujud air menjadi uap air disebut...','Menguap.',['Mencair.','Tertukar dengan padat menjadi cair.'],['Membeku.','Tertukar dengan cair menjadi padat.'],'Menguap: cair ke gas (dipanaskan). Mencair: padat ke cair. Membeku: cair ke padat.'),
+      Q('Q4','IPS-04','Rotasi Bumi',3,'Siang dan malam bergantian karena...','Bumi berputar pada porosnya (rotasi).',['Matahari mengelilingi bumi.','Terkecoh karena matahari tampak bergerak di langit.'],['Bumi mengelilingi matahari (revolusi).','Menyamakan rotasi dengan revolusi.'],'Rotasi menyebabkan siang dan malam; revolusi bumi mengelilingi matahari menyebabkan perubahan musim dan lamanya tahun.')]);
+
+    const PACK_META = {
+      tkj:{j:'smk',n:'Jaringan Komputer & Logika',m:'TJKT'}, rpl:{j:'smk',n:'Pemrograman & Basis Data',m:'RPL'},
+      akt:{j:'smk',n:'Akuntansi Dasar & Keuangan',m:'Akuntansi'}, titl:{j:'smk',n:'Dasar Listrik & Elektronika',m:'TITL'},
+      matsmk:{j:'smk',n:'Matematika Terapan SMK',m:'Umum'},
+      matematika:{j:'smp',n:'Aljabar & Persamaan Linear',m:'Matematika'}, ipa:{j:'smp',n:'Gaya, Energi & Rangkaian Listrik',m:'IPA'},
+      bio:{j:'smp',n:'Biologi',m:'Biologi'}, bindo:{j:'smp',n:'Bahasa Indonesia',m:'B. Indonesia'}, sej:{j:'smp',n:'Sejarah Indonesia',m:'Sejarah'},
+      pancasila:{j:'sd',n:'Pendidikan Pancasila',m:'Pancasila'}, bindsd:{j:'sd',n:'Bahasa Indonesia',m:'B. Indonesia'}, matsd:{j:'sd',n:'Matematika',m:'Matematika'}, ipas:{j:'sd',n:'IPAS (Alam & Sosial)',m:'IPAS'}
+    };
+    const lastPackKey = () => { const k=store.get('last'); return PRESET_PACKAGES[k]?k:'tkj'; };
+
+    function renderCover(){
+      const card=(k,soft)=>{const p=PRESET_PACKAGES[k],m=PACK_META[k],c=store.get('rec:'+k)?.length||0;
+        return `<button class="pack-card${soft?' soft':''}" onclick="enterApp('${k}','siswa')"><span class="chip bg-indigo-50 text-indigo-800 self-start">${m.m}</span><span class="text-base font-bold text-slate-900 leading-snug">${m.n}</span><span class="text-xs text-slate-500 mt-auto">${p.questions.length} butir${c?` &middot; ${c} hasil tersimpan`:''} &middot; <span class="text-indigo-700 font-semibold">Mulai &rarr;</span></span></button>`;};
+      const keys=Object.keys(PACK_META);
+      document.getElementById('grid-smk').innerHTML=keys.filter(k=>PACK_META[k].j==='smk').map(k=>card(k,false)).join('');
+      document.getElementById('grid-smp').innerHTML=keys.filter(k=>PACK_META[k].j==='smp').map(k=>card(k,true)).join('');
+      document.getElementById('grid-sd').innerHTML=keys.filter(k=>PACK_META[k].j==='sd').map(k=>card(k,true)).join('');
+      document.getElementById('st-packs').textContent=keys.length;
+      document.getElementById('st-items').textContent=keys.reduce((a,k)=>a+PRESET_PACKAGES[k].questions.length,0);
+      document.getElementById('st-saved').textContent=countSaved();
+    }
+    function showCover(){
+      document.getElementById('app-header').classList.add('hidden');
+      document.getElementById('main-content').classList.add('hidden');
+      document.getElementById('view-sampul').classList.remove('hidden');
+      renderCover(); window.scrollTo({top:0});
+    }
+    function enterApp(key,mode){
+      document.getElementById('view-sampul').classList.add('hidden');
+      document.getElementById('app-header').classList.remove('hidden');
+      document.getElementById('main-content').classList.remove('hidden');
+      if(key) loadPresetPackage(key);
+      switchMode(mode||'siswa'); window.scrollTo({top:0});
+    }
+    function buildSelector(){
+      const sel=document.getElementById('preset-selector'),g=(t,j)=>`<optgroup label="${t}">`+Object.keys(PACK_META).filter(k=>PACK_META[k].j===j).map(k=>`<option value="${k}">${PACK_META[k].m}: ${PACK_META[k].n} (${PRESET_PACKAGES[k].questions.length} soal)</option>`).join('')+'</optgroup>';
+      sel.innerHTML=g('SMK (utama)','smk')+g('SMP / MTs (opsional)','smp')+g('SD / MI (opsional)','sd');
+    }
+
+    (function(){
+      const lp=loadPresetPackage, fin=finishStudentSession, add=addCustomQuestion, rm=removeQuestion, imp=importPackJSON;
+      loadPresetPackage=function(k){ lp(k); const saved=store.get('pack:'+k); if(saved&&saved.questions){ currentPack=saved; } rebuildRecords(); updateHeaderPackInfo(); renderAuthoringList(); renderAnalyticsDashboard(); store.set('last',k); const s=document.getElementById('preset-selector'); if(s) s.value=k; };
+      finishStudentSession=function(){
+        fin(); const r=classRecords[0]; r.ts=Date.now(); r.rid=packId()+'-'+r.ts.toString(36)+Math.random().toString(36).slice(2,6);
+        const arr=store.get('rec:'+packId())||[]; arr.unshift(r);
+        const ok=store.set('rec:'+packId(),arr); if(ok) rebuildRecords();
+        showToast(ok?'Hasil tersimpan permanen di perangkat ini dan masuk ke Dasbor Guru.':'Penyimpanan browser diblokir; hasil hanya tersedia selama halaman terbuka.');
+      };
+      const keep=f=>function(){ const r=f.apply(this,arguments); store.set('pack:'+packId(),currentPack); return r; };
+      addCustomQuestion=keep(add); removeQuestion=keep(rm); importPackJSON=keep(imp);
+      const rq=renderCurrentQuestion;
+      renderCurrentQuestion=function(){ const q=currentPack.questions[studentState.currentIndex]; if(q&&q.options){ for(let i=q.options.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [q.options[i],q.options[j]]=[q.options[j],q.options[i]]; } } return rq.apply(this,arguments); };
+      const ss=startStudentSession;
+      startStudentSession=function(){ const n=document.getElementById('student-name'); if(!n.value.trim()){ showToast('Isi nama lengkap terlebih dahulu.'); n.focus(); return; } return ss.apply(this,arguments); };
+      const rd=renderAnalyticsDashboard;
+      renderAnalyticsDashboard=function(){ rd(); updateDataNote(); };
+    })();
+
+    function updateDataNote(){
+      const el=document.getElementById('data-note'); if(!el) return;
+      const n=(store.get('rec:'+packId())||[]).length;
+      el.textContent=n?`${n} hasil siswa nyata tersimpan di perangkat ini. Data simulasi ${classRecords.length>n?'ditampilkan':'disembunyikan'}.`:'Belum ada hasil siswa nyata; yang tampil adalah data simulasi contoh.';
+    }
+    function toggleSim(){ store.set('sim', store.get('sim')!==true); rebuildRecords(); renderAnalyticsDashboard(); }
+    function exportRecordsCSV(){
+      const rows=[['Nama','Skor','Miskonsepsi utama','Waktu']].concat((store.get('rec:'+packId())||[]).map(r=>[r.name,r.score,r.mainMisconception,new Date(r.ts||0).toLocaleString('id-ID')]));
+      if(rows.length<2){ showToast('Belum ada hasil siswa tersimpan untuk paket ini.'); return; }
+      const csv='\ufeff'+rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n');
+      const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})); a.download='hasil-diagnosa-'+packId()+'.csv'; a.click(); showToast('Berkas CSV hasil siswa diunduh.');
+    }
+    function clearSavedData(){
+      if(!confirm('Hapus semua hasil siswa dan perubahan paket yang tersimpan di perangkat ini?')) return;
+      try{ Object.keys(localStorage).filter(k=>k.indexOf('diag:')===0).forEach(k=>localStorage.removeItem(k)); }catch(e){}
+      loadPresetPackage(packId()); showToast('Data tersimpan telah dihapus.');
+    }
+    
+    window.addEventListener('DOMContentLoaded',()=>{
+      buildSelector();
+      document.getElementById('view-analitik').insertAdjacentHTML('afterbegin',`<div class="no-print flex flex-wrap items-center justify-between gap-2 bg-white border border-slate-200 rounded-2xl px-4 py-3"><span id="data-note" class="text-xs text-slate-600">Hasil siswa tersimpan otomatis di perangkat ini.</span><span class="flex gap-2"><button onclick="toggleSim()" class="px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold hover:border-indigo-600">Data simulasi</button><button onclick="exportRecordsCSV()" class="px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold hover:border-indigo-600">Unduh CSV</button><button onclick="clearSavedData()" class="px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold text-rose-700 hover:border-rose-400">Hapus data</button></span></div>`);
+      const k=lastPackKey(); loadPresetPackage(k); document.getElementById('toast-box').classList.add('hidden');
+      document.getElementById('app-header').classList.add('hidden'); document.getElementById('main-content').classList.add('hidden');
+      renderCover();
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      updateHeaderPackInfo();
+      renderAnalyticsDashboard();
+      renderAuthoringList();
+    });
+  </script>
+  <!-- ===== PERBAIKAN: adaptif, login guru, label simulasi, filter/ekspor/hapus cloud ===== -->
+<script>
+(function(){
+  const $=id=>document.getElementById(id), val=id=>($(id)?$(id).value.trim():'');
+  const LV=q=>q.level||1, clamp=n=>Math.max(1,Math.min(3,n));
+  window._src='sim';
+
+  /* ---------- 1. Mesin adaptif: urutan soal mengikuti jawaban ---------- */
+  function restoreOrder(){
+    const o=studentState&&studentState.orig;
+    if(o&&currentPack.questions.length===o.length&&o.every(q=>currentPack.questions.includes(q)))
+      currentPack.questions.sort((a,b)=>o.indexOf(a)-o.indexOf(b));
+    if(studentState) studentState.orig=null;
+  }
+  function nextTL(){
+    const cur=currentPack.questions[studentState.currentIndex], L=LV(cur);
+    const log=studentState.logs.find(l=>l.code===cur.code);
+    if(!log) return L;
+    return clamp(log.status==='mastered'?L+1:log.status==='misconception'?L-1:L);
+  }
+  function pickNext(tl){
+    const qs=currentPack.questions; let best=-1,bd=9;
+    for(let i=studentState.currentIndex+1;i<qs.length;i++){const d=Math.abs(LV(qs[i])-tl); if(d<bd){bd=d;best=i;}}
+    return best;
+  }
+  const s0=startStudentSession;
+  startStudentSession=function(){
+    if(!val('student-name')) return s0();
+    restoreOrder();
+    const orig=currentPack.questions.slice(), qs=currentPack.questions;
+    let b=0; qs.forEach((q,i)=>{ if(Math.abs(LV(q)-2)<Math.abs(LV(qs[b])-2)) b=i; });
+    [qs[0],qs[b]]=[qs[b],qs[0]];            // mulai dari soal level menengah
+    s0(); studentState.orig=orig;
+  };
+  const pn=proceedNextQuestion;
+  proceedNextQuestion=function(){
+    if(!studentState.isRemediationRetry && studentState.currentIndex<currentPack.questions.length-1){
+      const i=pickNext(nextTL()), j=studentState.currentIndex+1, qs=currentPack.questions;
+      if(i>j) [qs[i],qs[j]]=[qs[j],qs[i]];
+    }
+    return pn();
+  };
+  const sa=submitStudentAnswer;
+  submitStudentAnswer=function(){
+    sa();
+    if(studentState.isRemediationRetry||studentState.currentIndex>=currentPack.questions.length-1) return;
+    const tl=nextTL(), i=pickNext(tl); if(i<0) return;
+    const nl=LV(currentPack.questions[i]), cur=LV(currentPack.questions[studentState.currentIndex]);
+    const arah=nl>cur?'naik':nl<cur?'turun':'tetap';
+    $('diag-next-step-hint').textContent=`Mesin Adaptif: tingkat kesulitan ${arah} sesuai jawaban Anda. Soal berikutnya Level ${nl}.`;
+  };
+  const rs=resetStudentSession; resetStudentSession=function(){ restoreOrder(); return rs(); };
+  const fs=finishStudentSession;
+  finishStudentSession=function(){
+    const o=studentState.orig, idx=c=>o?o.findIndex(q=>q.code===c):0;
+    if(o) studentState.logs.sort((a,b)=>idx(a.code)-idx(b.code)); // peta panas memakai urutan paket asli
+    fs(); restoreOrder();
+    const n=currentPack.questions.length;
+    if(n<10) $('result-student-meta').textContent+=` • Paket pendek (${n} butir): hasil bersifat indikatif`;
+  };
+
+  /* ---------- 2. Data simulasi diberi label jelas dan tidak dicampur ---------- */
+  const gs=generateSimulatedRecords;
+  generateSimulatedRecords=p=>gs(p).map(r=>({...r,name:r.name+' (simulasi)',sim:true}));
+  rebuildRecords=function(){
+    const real=store.get('rec:'+packId())||[];
+    const sim=store.get('sim')===true||real.length===0;
+    classRecords=sim?generateSimulatedRecords(currentPack):real; window._src=sim?'sim':'lokal';
+  };
+  updateDataNote=function(){
+    const el=$('data-note'), bn=$('src-banner'); if(!el||!bn) return;
+    const n=(store.get('rec:'+packId())||[]).length, t=document.querySelector('[onclick="toggleSim()"]');
+    if(t) t.textContent=window._src==='sim'&&n?'Lihat hasil nyata':'Data simulasi';
+    let cls='border-emerald-300 bg-emerald-50 text-emerald-900', msg;
+    if(window._src==='sim'){
+      cls='border-amber-400 bg-amber-50 text-amber-900';
+      msg='⚠️ DATA SIMULASI — contoh tampilan, BUKAN hasil siswa sungguhan. Jangan dipakai untuk keputusan pembelajaran.';
+      el.textContent=n?`${n} hasil nyata tersimpan di perangkat ini (sedang disembunyikan).`:'Belum ada hasil siswa nyata.';
+    } else if(window._src==='cloud'){
+      msg=`Data nyata dari cloud: ${classRecords.length} siswa (sesuai filter).`; el.textContent='Sumber: Firebase.';
+    } else { msg=`Data nyata: ${n} hasil siswa tersimpan di perangkat ini.`; el.textContent='Sumber: perangkat ini.'; }
+    bn.className='rounded-2xl border px-4 py-2.5 text-sm font-bold '+cls; bn.textContent=msg;
+  };
+
+  /* ---------- 3. Login guru (Firebase Auth) ---------- */
+  window._pend=null; const sm=switchMode;
+  switchMode=function(m){
+    if((m==='analitik'||m==='authoring')&&!window._guru&&!window._pin){ window._pend=m; showLogin(); return; }
+    sm(m);
+  };
+  function showLogin(msg){
+    $('login-guru').classList.remove('hidden'); $('lg-err').textContent=msg||'';
+    setTimeout(()=>$('lg-email').focus(),50);
+  }
+  window.loginGuru=async function(){
+    if(!window.fb){ $('lg-err').textContent='Sistem login belum siap. Periksa koneksi internet.'; return; }
+    $('lg-err').textContent='Memeriksa...';
+    try{ await fb.masuk(val('lg-email'),$('lg-pw').value); $('lg-pw').value=''; $('login-guru').classList.add('hidden'); if(pending) switchMode(pending); }
+    catch(e){ $('lg-err').textContent='Email atau kata sandi salah, atau akun belum terdaftar sebagai guru.'; }
+  };
+  window.keluarGuru=async function(){ if(window.fb) await fb.keluar(); showToast('Anda sudah keluar dari mode guru.'); };
+  window.addEventListener('guru-auth',()=>{ if(!window._guru&&!window._pin) sm('siswa'); });
+
+  /* ---------- 4. Cloud: filter kelas/tanggal, ekspor CSV, hapus ---------- */
+  let raw=[];
+  const tgl=w=>w?new Date(w).toLocaleDateString('sv-SE'):'';
+  function filtered(){
+    const pid=packId(),k=val('cf-kelas'),a=val('cf-dari'),b=val('cf-sampai');
+    return raw.filter(d=>(!d.paket||d.paket===pid)&&(!k||d.kelas===k)&&(!a||tgl(d.waktu)>=a)&&(!b||tgl(d.waktu)<=b));
+  }
+  function fillKelas(){
+    const cur=val('cf-kelas'), ks=[...new Set(raw.map(d=>d.kelas).filter(Boolean))].sort();
+    $('cf-kelas').innerHTML='<option value="">Semua kelas</option>'+ks.map(k=>`<option ${k===cur?'selected':''}>${esc(k)}</option>`).join('');
+  }
+  window.applyCloudFilter=function(){
+    const data=filtered();
+    if(!data.length){ showToast('Tidak ada data cloud yang cocok dengan filter.'); return; }
+    classRecords=data.map(d=>{
+      const skor=Number(d.skor)||0, ok=Array.isArray(d.itemStatuses)&&d.itemStatuses.length===currentPack.questions.length;
+      return {name:(d.nama||'Tanpa Nama')+(d.kelas?` (${d.kelas})`:''),score:skor,mainMisconception:d.miskonsepsi||'Tidak ada miskonsepsi',
+        itemStatuses: ok?d.itemStatuses:currentPack.questions.map(q=>({code:q.code,topic:q.topic,status:skor>=80?'mastered':skor>=60?'remediated':'misconception',misconception:skor>=80?null:(d.miskonsepsi||null)}))};
+    });
+    window._src='cloud'; renderAnalyticsDashboard(); showToast(`Menampilkan ${data.length} data dari cloud.`);
+  };
+  loadDataDariFirebase=async function(){
+    if(!window.fb){ showToast('Sistem Firebase belum siap. Periksa koneksi internet.'); return; }
+    showToast('Menarik data dari Firebase...');
+    const d=await fb.tarik();
+    if(d===null){ showToast('Gagal menarik data. Pastikan Anda login sebagai guru dan aturan Firestore sudah dipasang.'); return; }
+    raw=d; fillKelas();
+    if(!filtered().length){ showToast('Belum ada data siswa di Firebase untuk paket ini.'); return; }
+    applyCloudFilter();
+  };
+  window.exportCloudCSV=function(){
+    const d=filtered(); if(!d.length){ showToast('Tarik data cloud dulu, atau filter tidak cocok.'); return; }
+    const rows=[['Nama','Kelas','Paket','Skor','Miskonsepsi utama','Waktu']].concat(d.map(x=>[x.nama,x.kelas,x.paket,x.skor,x.miskonsepsi,x.waktu?new Date(x.waktu).toLocaleString('id-ID'):'']));
+    const csv='\ufeff'+rows.map(r=>r.map(c=>'"'+String(c==null?'':c).replace(/"/g,'""')+'"').join(',')).join('\n');
+    const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})); a.download='hasil-cloud-'+packId()+'.csv'; a.click();
+  };
+  window.hapusCloud=async function(){
+    const d=filtered(); if(!d.length){ showToast('Tidak ada data terfilter untuk dihapus.'); return; }
+    if(!confirm(`Hapus ${d.length} data siswa dari Firebase secara permanen? Tindakan ini tidak bisa dibatalkan.`)) return;
+    try{ await fb.hapus(d.map(x=>x.id)); const del=new Set(d.map(x=>x.id)); raw=raw.filter(x=>!del.has(x.id)); fillKelas();
+      showToast(`${d.length} data dihapus dari Firebase.`); if(filtered().length) applyCloudFilter(); else { rebuildRecords(); renderAnalyticsDashboard(); } }
+    catch(e){ showToast('Gagal menghapus. Pastikan akun guru terdaftar di aturan Firestore.'); }
+  };
+
+  /* ---------- 5. Butir dengan 4 pilihan di editor soal ---------- */
+  const ac=addCustomQuestion;
+  addCustomQuestion=function(){
+    const t=val('new-opt-wrong3'), m=val('new-misc-wrong3'), n=currentPack.questions.length;
+    ac();
+    if(currentPack.questions.length>n){
+      if(t){ currentPack.questions[n].options.push({text:t,isCorrect:false,misconception:m||'Kekeliruan penalaran pada penerapan konsep.'}); renderAuthoringList(); store.set('pack:'+packId(),currentPack); }
+      ['new-opt-wrong3','new-misc-wrong3'].forEach(i=>{ if($(i)) $(i).value=''; });
+    }
+  };
+
+  window.addEventListener('DOMContentLoaded',()=>{
+    const note=$('data-note'), bar=note&&note.parentElement; if(!bar) return;
+    bar.insertAdjacentHTML('afterend',
+     `<div id="src-banner" class="rounded-2xl border px-4 py-2.5 text-sm font-bold"></div>
+      <div class="no-print flex flex-wrap items-end gap-2 bg-white border border-slate-200 rounded-2xl px-4 py-3 text-xs">
+        <label class="grid gap-1 font-semibold text-slate-600">Kelas<select id="cf-kelas" onchange="applyCloudFilter()" class="border border-slate-300 rounded-lg px-2 py-1.5"><option value="">Semua kelas</option></select></label>
+        <label class="grid gap-1 font-semibold text-slate-600">Dari tanggal<input id="cf-dari" type="date" onchange="applyCloudFilter()" class="border border-slate-300 rounded-lg px-2 py-1.5"></label>
+        <label class="grid gap-1 font-semibold text-slate-600">Sampai<input id="cf-sampai" type="date" onchange="applyCloudFilter()" class="border border-slate-300 rounded-lg px-2 py-1.5"></label>
+        <button onclick="exportCloudCSV()" class="px-3 py-2 rounded-lg border border-slate-300 font-semibold hover:border-indigo-600">Ekspor CSV cloud</button>
+        <button onclick="hapusCloud()" class="px-3 py-2 rounded-lg border border-slate-300 font-semibold text-rose-700 hover:border-rose-400">Hapus data cloud terfilter</button>
+        <button onclick="keluarGuru()" class="px-3 py-2 rounded-lg border border-slate-300 font-semibold ml-auto">Keluar (guru)</button>
+      </div>`);
+    document.body.insertAdjacentHTML('beforeend',
+     `<div id="login-guru" class="hidden fixed inset-0 z-[100] bg-slate-900/60 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl space-y-3">
+          <h3 class="text-lg font-extrabold text-slate-900">Masuk sebagai Guru</h3>
+          <div class="flex gap-1 bg-slate-100 p-1 rounded-lg text-xs font-semibold"><button id="tb-cloud" onclick="tabLogin('cloud')" class="flex-1 py-1.5 rounded-md bg-white shadow">Akun Guru (cloud)</button><button id="tb-pin" onclick="tabLogin('pin')" class="flex-1 py-1.5 rounded-md">Mode Cadangan (PIN)</button></div>
+          <div id="lg-cloud" class="space-y-2">
+            <button onclick="loginGoogle()" class="w-full border border-slate-300 rounded-lg py-2 text-sm font-semibold hover:border-indigo-600">Masuk dengan Google</button>
+            <div class="text-center text-[11px] text-slate-400">atau dengan email</div>
+            <input id="lg-email" type="email" placeholder="Email guru" autocomplete="username" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm">
+            <input id="lg-pw" type="password" placeholder="Kata sandi (min. 6 karakter)" autocomplete="current-password" onkeydown="if(event.key==='Enter')loginGuru()" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm">
+            <div class="flex gap-2"><button onclick="loginGuru()" class="flex-1 py-2 rounded-lg bg-indigo-600 text-white text-sm font-semibold">Masuk</button><button onclick="daftarGuru()" class="flex-1 py-2 rounded-lg border border-slate-300 text-sm font-semibold">Daftar baru</button></div>
+          </div>
+          <div id="lg-pinbox" class="hidden space-y-2">
+            <p id="lg-pinhint" class="text-xs text-slate-600"></p>
+            <input id="lg-pin" type="password" inputmode="numeric" maxlength="8" placeholder="PIN 4-8 angka" onkeydown="if(event.key==='Enter')masukPin()" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm">
+            <button onclick="masukPin()" class="w-full py-2 rounded-lg bg-indigo-600 text-white text-sm font-semibold">Buka</button>
+            <p class="text-[11px] text-slate-500">PIN hanya pagar ringan di perangkat ini, bukan keamanan sungguhan. Data cloud tetap memerlukan akun guru.</p>
+          </div>
+          <p id="lg-err" class="text-xs text-rose-700 min-h-[1rem]"></p>
+          <div class="text-right"><button onclick="document.getElementById('login-guru').classList.add('hidden')" class="px-3 py-1.5 rounded-lg border border-slate-300 text-sm font-semibold">Batal</button></div>
+        </div></div>`);
+    const m=$('new-misc-wrong2'), host=m&&m.parentElement;
+    if(host) host.insertAdjacentHTML('afterend',
+     `<div class="grid gap-2 mt-2"><input id="new-opt-wrong3" placeholder="Pengecoh 3 (opsional, jadi pilihan D)" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"><input id="new-misc-wrong3" placeholder="Miskonsepsi pengecoh 3" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"></div>`);
+    rebuildRecords(); renderAnalyticsDashboard();
+  });
+})();
+</script>
+
+<!-- ===== KODE KELAS (mode A) + BERKAS/PIN (mode B) ===== -->
+<script>
+(function(){
+  const $=id=>document.getElementById(id), val=id=>($(id)?$(id).value.trim():'');
+  const normKode=s=>String(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'').replace(/^(.{3})(.+)$/,'$1-$2');
+  const dl=(t,type,name)=>{ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([t],{type})); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1500); };
+  window._kelasAktif=null; window._lastRec=null; let kelas=[];
+
+  /* --- Siswa: verifikasi kode saat mulai --- */
+  const s1=startStudentSession;
+  startStudentSession=async function(){
+    if(!val('student-name')) return s1();
+    const k=normKode(val('student-code')); window._kelasAktif=null;
+    if(k){
+      if(!/^[A-Z0-9]{3}-[A-Z0-9]{4}$/.test(k)){ showToast('Format kode kelas tidak sesuai. Contoh: XK7-TKJ2.'); return; }
+      if(!window.fb) showToast('Cloud belum siap. Tes tetap berjalan; unduh berkas hasil untuk dikirim ke guru.');
+      else try{
+        const d=await fb.cekKode(k);
+        if(!d||d.aktif!==true){ showToast(d?'Kode kelas ini sedang dinonaktifkan oleh guru.':'Kode kelas tidak ditemukan. Periksa kembali.'); return; }
+        window._kelasAktif={kode:k,guruUid:d.guruUid,nama:d.nama};
+        if(!val('student-class')) $('student-class').value=d.nama||'';
+      }catch(e){ showToast('Kode tidak bisa diverifikasi (offline?). Tes tetap berjalan; unduh berkas hasil untuk dikirim ke guru.'); }
+    }
+    return s1();
+  };
+
+  /* --- Siswa: kirim ke cloud hanya jika kode valid; selalu bisa unduh berkas --- */
+  const f1=finishStudentSession;
+  finishStudentSession=function(){
+    f1();
+    const L=studentState.logs, score=parseInt($('result-score-big').textContent)||0, kc=window._kelasAktif;
+    const first=(L.find(l=>l.misconception)||{}).misconception||'Tidak ada miskonsepsi';
+    const items=L.map(l=>({code:l.code,topic:l.topic,status:l.status,misconception:l.misconception||null}));
+    const rec={v:1,rid:packId()+'-'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),nama:studentState.name,kelas:studentState.className,
+      paket:packId(),skor:score,miskonsepsi:first,itemStatuses:items,waktu:new Date().toISOString()};
+    window._lastRec=rec; const st=$('cloud-status');
+    if(kc&&window.fb){
+      st.textContent='Mengirim ke guru...';
+      fb.simpan({nama:rec.nama.slice(0,100),kelas:rec.kelas.slice(0,50),kode:kc.kode,guruUid:kc.guruUid,paket:rec.paket.slice(0,50),
+        skor:score,miskonsepsi:first.slice(0,500),itemStatuses:items,waktu:rec.waktu})
+       .then(ok=>{ st.textContent=ok?'✅ Hasil terkirim ke guru (kode '+kc.kode+').':'⚠️ Gagal mengirim ke cloud. Unduh berkas hasil dan kirim ke guru.'; });
+    } else st.textContent=kc?'Unduh berkas hasil dan kirim ke guru.':'Tanpa kode kelas: hasil hanya tersimpan di perangkat ini. Unduh berkas hasil untuk dikirim ke guru.';
+  };
+  window.unduhHasil=function(){
+    const r=window._lastRec; if(!r){ showToast('Belum ada hasil untuk diunduh.'); return; }
+    dl(JSON.stringify(r,null,1),'application/json','hasil-'+String(r.nama).replace(/[^\w]+/g,'-').slice(0,30)+'.json');
+  };
+
+  /* --- Guru (mode B): impor berkas hasil --- */
+  window.imporHasil=async function(inp){
+    let n=0,dup=0,bad=0;
+    for(const f of inp.files){
+      try{
+        for(const r of [].concat(JSON.parse(await f.text()))){
+          if(!r||typeof r.nama!=='string'||typeof r.rid!=='string'||typeof r.paket!=='string'||!/^[\w-]{1,50}$/.test(r.paket)||
+             !Number.isFinite(r.skor)||r.skor<0||r.skor>100||!Array.isArray(r.itemStatuses)||r.itemStatuses.length>60){ bad++; continue; }
+          const key='rec:'+r.paket, list=store.get(key)||[], id='imp-'+r.rid;
+          if(list.some(x=>x.rid===id)){ dup++; continue; }
+          list.unshift({name:r.nama.slice(0,100)+(r.kelas?' ('+String(r.kelas).slice(0,50)+')':''),score:r.skor,
+            mainMisconception:String(r.miskonsepsi||'Tidak ada miskonsepsi').slice(0,500),
+            itemStatuses:r.itemStatuses.map(i=>({code:String(i&&i.code||'').slice(0,20),topic:String(i&&i.topic||'').slice(0,120),
+              status:['mastered','remediated','misconception'].includes(i&&i.status)?i.status:'misconception',
+              misconception:i&&i.misconception?String(i.misconception).slice(0,300):null})),
+            ts:Date.parse(r.waktu)||Date.now(),rid:id});
+          store.set(key,list); n++;
+        }
+      }catch(e){ bad++; }
+    }
+    inp.value=''; store.set('sim',false); window._src='lokal'; rebuildRecords(); renderAnalyticsDashboard();
+    showToast(`Impor selesai: ${n} hasil baru, ${dup} duplikat, ${bad} berkas/baris tidak valid. Hasil tampil per paket soal yang aktif.`);
+  };
+
+  /* --- Guru: login cloud (Google/email) --- */
+  const errMsg=e=>{ const c=(e&&e.code)||'';
+    return /wrong-password|invalid-credential|user-not-found/.test(c)?'Email atau kata sandi salah. Belum punya akun? Tekan Daftar baru.':
+      /email-already/.test(c)?'Email sudah terdaftar. Silakan Masuk.':/weak-password/.test(c)?'Kata sandi minimal 6 karakter.':
+      /invalid-email/.test(c)?'Format email tidak valid.':/popup-closed|cancelled/.test(c)?'Jendela Google ditutup.':
+      /operation-not-allowed/.test(c)?'Metode login ini belum diaktifkan di Firebase Console.':
+      /unauthorized-domain/.test(c)?'Domain situs ini belum diizinkan di Firebase Authentication.':
+      /operation-not-supported/.test(c)?'Login Google butuh halaman dibuka lewat https/hosting, bukan berkas lokal.':'Gagal masuk ('+c+'). Periksa koneksi lalu coba lagi.'; };
+  async function cloudLogin(fn){
+    const e=$('lg-err'); if(!window.fb){ e.textContent='Sistem login belum siap. Periksa koneksi internet.'; return; }
+    e.textContent='Memeriksa...';
+    try{ const c=await fn(); window._guru=c.user; window._pin=false; $('lg-pw').value=''; $('login-guru').classList.add('hidden'); e.textContent=''; refreshKP(); if(window._pend) switchMode(window._pend); }
+    catch(x){ e.textContent=errMsg(x); }
+  }
+  window.loginGuru=()=>cloudLogin(()=>fb.masuk(val('lg-email'),$('lg-pw').value));
+  window.daftarGuru=()=>cloudLogin(()=>fb.daftar(val('lg-email'),$('lg-pw').value));
+  window.loginGoogle=()=>cloudLogin(()=>fb.masukGoogle());
+  window.keluarGuru=async function(){ window._pin=false; if(window.fb) try{ await fb.keluar(); }catch(e){} window._guru=null; refreshKP(); showToast('Anda sudah keluar dari mode guru.'); switchMode('siswa'); };
+  const ld=loadDataDariFirebase;
+  loadDataDariFirebase=function(){ if(!window._guru){ showToast('Tarik data cloud perlu login akun guru. Pada mode PIN, gunakan Impor berkas hasil.'); return; } return ld(); };
+
+  /* --- Guru (mode B): PIN lokal --- */
+  const PK='diagpin';
+  const getCfg=()=>{ try{ return JSON.parse(localStorage.getItem(PK)); }catch(e){ return null; } };
+  async function hs(p,salt){ const b=new TextEncoder().encode(salt+':'+p);
+    if(window.crypto&&crypto.subtle){ const d=await crypto.subtle.digest('SHA-256',b); return [...new Uint8Array(d)].map(x=>x.toString(16).padStart(2,'0')).join(''); }
+    let x=5381; for(const c of b) x=((x<<5)+x+c)>>>0; return 'w'+x; }
+  window.tabLogin=function(t){
+    const c=t==='cloud'; $('lg-cloud').classList.toggle('hidden',!c); $('lg-pinbox').classList.toggle('hidden',c); $('lg-err').textContent='';
+    $('tb-cloud').className='flex-1 py-1.5 rounded-md'+(c?' bg-white shadow':''); $('tb-pin').className='flex-1 py-1.5 rounded-md'+(c?'':' bg-white shadow');
+    if(!c) $('lg-pinhint').textContent=getCfg()?'Masukkan PIN dasbor untuk perangkat ini.':'Belum ada PIN. Ketik PIN baru (4-8 angka); PIN itu dipakai di perangkat ini.';
+  };
+  window.masukPin=async function(){
+    const p=$('lg-pin').value, e=$('lg-err'), cfg=getCfg();
+    if(!/^\d{4,8}$/.test(p)){ e.textContent='PIN harus 4-8 angka.'; return; }
+    if(!cfg){ const salt=Math.random().toString(36).slice(2);
+      try{ localStorage.setItem(PK,JSON.stringify({salt,h:await hs(p,salt)})); }catch(x){ e.textContent='Penyimpanan browser diblokir.'; return; } }
+    else if(cfg.h!==await hs(p,cfg.salt)){ e.textContent='PIN salah.'; return; }
+    window._pin=true; $('lg-pin').value=''; e.textContent=''; $('login-guru').classList.add('hidden'); refreshKP(); if(window._pend) switchMode(window._pend);
+  };
+
+  /* --- Guru: panel kode kelas --- */
+  async function refreshKP(){
+    const c=$('kp-cloud'); if(!c) return; c.classList.toggle('hidden',!window._guru); if(!window._guru) return;
+    $('kp-user').textContent=window._guru.email||''; const l=await fb.kelasSaya(); if(l===null){ showToast('Gagal memuat kode kelas. Periksa aturan Firestore.'); return; }
+    kelas=l; $('kp-list').innerHTML=l.length?l.map(k=>`<div class="flex flex-wrap items-center gap-2 border border-slate-200 rounded-lg px-3 py-2">
+      <span class="font-mono font-bold text-sm text-slate-900">${esc(k.kode)}</span><span class="text-slate-600">${esc(k.nama)}</span>
+      <span class="px-2 py-0.5 rounded font-bold ${k.aktif?'bg-emerald-100 text-emerald-800':'bg-slate-200 text-slate-600'}">${k.aktif?'Aktif':'Nonaktif'}</span>
+      <span class="ml-auto flex gap-1.5"><button onclick="salinKode('${esc(k.kode)}')" class="px-2.5 py-1 rounded-md border border-slate-300 font-semibold">Salin</button>
+      <button onclick="toggleKode('${esc(k.kode)}',${!k.aktif})" class="px-2.5 py-1 rounded-md border border-slate-300 font-semibold">${k.aktif?'Nonaktifkan':'Aktifkan'}</button>
+      <button onclick="hapusKode('${esc(k.kode)}')" class="px-2.5 py-1 rounded-md border border-slate-300 font-semibold text-rose-700">Hapus</button></span></div>`).join(''):'<p class="text-slate-500">Belum ada kode kelas. Buat satu di atas.</p>';
+  }
+  window.buatKode=async function(){ const n=val('kp-nama'); if(!n){ showToast('Isi nama kelas dulu.'); return; }
+    try{ const k=await fb.buatKode(n); $('kp-nama').value=''; showToast('Kode kelas dibuat: '+k); refreshKP(); }catch(e){ showToast('Gagal membuat kode. Pastikan aturan Firestore terbaru sudah dipublikasikan.'); } };
+  window.salinKode=k=>{ (navigator.clipboard?navigator.clipboard.writeText(k):Promise.reject()).then(()=>showToast('Kode '+k+' disalin.'),()=>showToast('Kode: '+k)); };
+  window.toggleKode=async(k,a)=>{ try{ await fb.ubahKode(k,a); refreshKP(); }catch(e){ showToast('Gagal mengubah status kode.'); } };
+  window.hapusKode=async k=>{ if(!confirm('Hapus kode '+k+'? Siswa tidak bisa lagi memakainya. Hasil yang sudah masuk tetap tersimpan.')) return;
+    try{ await fb.hapusKode(k); refreshKP(); }catch(e){ showToast('Gagal menghapus kode.'); } };
+  window.addEventListener('guru-auth',refreshKP);
+
+  window.addEventListener('DOMContentLoaded',()=>{
+    const b=$('src-banner'); if(!b) return;
+    b.insertAdjacentHTML('beforebegin',`<div id="kp" class="no-print bg-white border border-slate-200 rounded-2xl px-4 py-3 text-xs space-y-3">
+      <div id="kp-cloud" class="hidden space-y-2">
+        <div class="flex flex-wrap items-center gap-2"><strong class="text-sm text-slate-800">Kode Kelas Saya</strong><span id="kp-user" class="text-slate-500"></span>
+          <span class="ml-auto flex gap-2"><input id="kp-nama" maxlength="60" placeholder="Nama kelas, mis. XI TKJ 1" class="border border-slate-300 rounded-lg px-2.5 py-1.5"><button onclick="buatKode()" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-semibold">Buat kode baru</button></span></div>
+        <div id="kp-list" class="grid gap-1.5"></div>
+        <p class="text-slate-500">Bagikan kode ke siswa. Hanya akun Anda yang dapat membaca hasil siswa yang memakai kode Anda.</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2"><strong class="text-slate-800">Mode cadangan (tanpa cloud):</strong>
+        <label class="px-3 py-1.5 rounded-lg border border-slate-300 font-semibold cursor-pointer hover:border-indigo-600">Impor berkas hasil siswa (.json)<input type="file" accept=".json,application/json" multiple class="hidden" onchange="imporHasil(this)"></label>
+        <span class="text-slate-500">Siswa mengunduh berkas di akhir tes, lalu mengirimkannya ke Anda.</span></div></div>`);
+    refreshKP();
+  });
+})();
+</script>
+
+<!-- ===== FIREBASE (Firestore + Auth) ===== -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, getDoc, setDoc, updateDoc, deleteDoc, doc, query, where, limit } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+  // Catatan: apiKey web Firebase memang publik. Keamanan data ada pada firestore.rules, bukan pada kunci ini.
+  const app = initializeApp({
+    apiKey: "AIzaSyBueX7cuQFuKIaXoaHaxc564k5UfBHWvto",
+    authDomain: "diagnosa-belajar.firebaseapp.com",
+    projectId: "diagnosa-belajar",
+    storageBucket: "diagnosa-belajar.firebasestorage.app",
+    messagingSenderId: "259656549652",
+    appId: "1:259656549652:web:3d01460009fa34d2056e01"
+  });
+  const db = getFirestore(app), auth = getAuth(app), COL = "hasil_diagnosa", KEL = "kelas";
+  const ALPHA = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";   // tanpa I, O, 0, 1 agar tidak membingungkan
+  const rnd = n => [...crypto.getRandomValues(new Uint32Array(n))].map(x => ALPHA[x % ALPHA.length]).join("");
+
+  window.fb = {
+    simpan: async (d) => { try { await addDoc(collection(db, COL), d); return true; } catch (e) { console.error("Gagal mengirim:", e); return false; } },
+    cekKode: async (k) => { const s = await getDoc(doc(db, KEL, k)); return s.exists() ? s.data() : null; },
+    tarik: async () => {
+      try {
+        const s = await getDocs(query(collection(db, COL), where("guruUid", "==", auth.currentUser.uid), limit(1000)));
+        return s.docs.map(x => ({ id: x.id, ...x.data() })).sort((a, b) => String(b.waktu || "").localeCompare(String(a.waktu || "")));
+      } catch (e) { console.error("Gagal menarik data:", e); return null; }
+    },
+    hapus: async (ids) => { for (const id of ids) await deleteDoc(doc(db, COL, id)); },
+    kelasSaya: async () => {
+      try {
+        const s = await getDocs(query(collection(db, KEL), where("guruUid", "==", auth.currentUser.uid)));
+        return s.docs.map(x => ({ kode: x.id, ...x.data() })).sort((a, b) => String(b.dibuat || "").localeCompare(String(a.dibuat || "")));
+      } catch (e) { console.error("Gagal memuat kode kelas:", e); return null; }
+    },
+    buatKode: async (nama) => {
+      for (let i = 0; i < 5; i++) {
+        const k = rnd(3) + "-" + rnd(4);
+        try { await setDoc(doc(db, KEL, k), { guruUid: auth.currentUser.uid, nama: nama.slice(0, 60), aktif: true, dibuat: new Date().toISOString() }); return k; }
+        catch (e) { if (i === 4) throw e; }
+      }
+    },
+    ubahKode: (k, aktif) => updateDoc(doc(db, KEL, k), { aktif }),
+    hapusKode: (k) => deleteDoc(doc(db, KEL, k)),
+    masuk: (email, pw) => signInWithEmailAndPassword(auth, email, pw),
+    daftar: (email, pw) => createUserWithEmailAndPassword(auth, email, pw),
+    masukGoogle: () => signInWithPopup(auth, new GoogleAuthProvider()),
+    keluar: () => signOut(auth)
+  };
+  // Pengiriman hasil siswa kini ditangani skrip kode kelas (butuh kode valid), bukan window.simpanKeFirebase.
+  onAuthStateChanged(auth, (u) => { window._guru = u || null; window.dispatchEvent(new Event("guru-auth")); });
+</script>
+</body>
+</html>
